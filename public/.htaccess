@@ -9,9 +9,8 @@ Options -MultiViews -Indexes
 # or direct visit to /vessels/airboat, /capabilities, etc. never returns a 404.
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  # If the site is served from a sub-folder (e.g. /marine/), set:
-  # RewriteBase /marine/
-  RewriteBase /
+  # No RewriteBase and a relative target: this works from the web root or from
+  # any sub-folder (for example /demo/) without editing this file.
 
   # Optional: force HTTPS once an SSL certificate is installed.
   # RewriteCond %{HTTPS} off
@@ -24,7 +23,7 @@ Options -MultiViews -Indexes
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L]
+  RewriteRule . index.html [L]
 </IfModule>
 
 # --- Compression ---------------------------------------------------------

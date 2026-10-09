@@ -47,9 +47,23 @@ removed from `dist/` automatically on every build, so it is never deployed.
    web root.
 3. `.htaccess` sends every route (for example `/vessels/airboat`) to
    `index.html`, so refreshing a page does not return a 404. It also enables
-   gzip, caching and security headers. If the site is served from a sub-folder,
-   set `RewriteBase` in that file. Uncomment the HTTPS block once an SSL
+   gzip, caching and security headers, and works from the web root or from a
+   sub-folder without editing. Uncomment the HTTPS block once an SSL
    certificate is installed.
+
+### Base path (root vs sub-folder)
+
+The folder the site is served from is set in `.env.production`:
+
+```
+VITE_BASE=/demo/   # https://itusmarine.in/demo/
+VITE_BASE=/        # https://itusmarine.in/  (final live site)
+```
+
+It controls the asset URLs, the router and every image path (through
+`src/utils/asset.ts`). After changing it, run `npm run build` again and upload
+the new `dist/` contents. Upload `index.html` and `assets/` together, because
+the file names in `assets/` change on every build.
 4. Before launch, replace the relative URLs in `public/sitemap.xml` and
    `public/robots.txt` with the full domain (for example
    `https://example.com/vessels`).

@@ -1,3 +1,4 @@
+import { asset } from '@/utils/asset'
 import type { CapabilityChapterData } from '@/types'
 
 export const capabilityChapters: CapabilityChapterData[] = [
@@ -12,7 +13,7 @@ export const capabilityChapters: CapabilityChapterData[] = [
       'Lightweight construction',
       'Modular configurations',
     ],
-    image: '/images/capabilities/shipbuilding.webp',
+    image: asset('/images/capabilities/shipbuilding.webp'),
   },
   {
     id: 'engineering-integration',
@@ -24,7 +25,7 @@ export const capabilityChapters: CapabilityChapterData[] = [
       'Propulsion integration',
       'Project-specific configuration',
     ],
-    image: '/images/capabilities/engineering-integration.webp',
+    image: asset('/images/capabilities/engineering-integration.webp'),
   },
   {
     id: 'marine-systems',
@@ -44,7 +45,7 @@ export const capabilityChapters: CapabilityChapterData[] = [
       'Boat trailers',
       'Approved marine accessories',
     ],
-    image: '/images/capabilities/marine-systems.webp',
+    image: asset('/images/capabilities/marine-systems.webp'),
   },
   {
     id: 'testing-commissioning',
@@ -57,7 +58,7 @@ export const capabilityChapters: CapabilityChapterData[] = [
       'Documentation',
       'Acceptance support',
     ],
-    image: '/images/capabilities/testing-commissioning.webp',
+    image: asset('/images/capabilities/testing-commissioning.webp'),
   },
   {
     id: 'lifecycle-support',
@@ -72,6 +73,6 @@ export const capabilityChapters: CapabilityChapterData[] = [
       'Water-jet overhaul',
       'Preventive maintenance',
     ],
-    image: '/images/capabilities/lifecycle-support.webp',
+    image: asset('/images/capabilities/lifecycle-support.webp'),
   },
 ]

@@ -1,3 +1,4 @@
+import { asset } from '@/utils/asset'
 import { Link } from 'react-router-dom'
 import Arrow from '@/components/common/Arrow'
 import type { Vessel } from '@/types'
@@ -6,7 +7,7 @@ export default function HomeHero({ vessel }: { vessel: Vessel }) {
   return (
     <section className="home-hero">
       <div className="home-hero-image">
-        <img src="/images/home/hero/hero.webp" alt={`${vessel.name} underway on a beach`} />
+        <img src={asset('/images/home/hero/hero.webp')} alt={`${vessel.name} underway on a beach`} />
       </div>
       <div className="home-hero-panel">
         <h1>

@@ -1,3 +1,4 @@
+import { asset } from '@/utils/asset'
 import { Link } from 'react-router-dom'
 import Arrow from '@/components/common/Arrow'
 
@@ -29,7 +30,7 @@ export default function CapabilityPreview() {
     <section className="capability-preview section-ivory">
       <div className="capability-visual">
         <img
-          src="/images/home/from-building-to-commissioning/amphibious-boat-2.webp"
+          src={asset('/images/home/from-building-to-commissioning/amphibious-boat-2.webp')}
           alt="ITUS amphibious vessel platform"
         />
         <span>Integrated Marine Capability</span>

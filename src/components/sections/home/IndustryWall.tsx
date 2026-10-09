@@ -1,3 +1,4 @@
+import { asset } from '@/utils/asset'
 import SectionHeading from '@/components/common/SectionHeading'
 
 const sectors = [
@@ -23,7 +24,7 @@ export default function IndustryWall() {
       </div>
       <img
         className="industry-wordmark"
-        src="/images/home/across-maritime-spectrum/typographic-rescue-boat-wordmark-1.svg"
+        src={asset('/images/home/across-maritime-spectrum/typographic-rescue-boat-wordmark-1.svg')}
         alt={`Maritime sectors served: ${sectors.join(', ')}`}
       />
     </section>

@@ -1,3 +1,4 @@
+import { asset } from '@/utils/asset'
 import type { FormEvent } from 'react'
 import FormField from '@/components/common/FormField'
 import Seo from '@/components/common/Seo'
@@ -29,7 +30,7 @@ export default function Contact() {
       />
       <section className="contact-split">
         <div className="contact-visual">
-          <img src="/images/contact/amphibious-boat-4.webp" alt="ITUS marine team vessel" />
+          <img src={asset('/images/contact/amphibious-boat-4.webp')} alt="ITUS marine team vessel" />
           <span>ITUS / CONTACT / MARINE</span>
         </div>
         <div className="contact-panel">

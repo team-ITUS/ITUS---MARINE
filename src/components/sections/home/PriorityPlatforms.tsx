@@ -1,3 +1,4 @@
+import { asset } from '@/utils/asset'
 import { Link } from 'react-router-dom'
 import Arrow from '@/components/common/Arrow'
 import SectionHeading from '@/components/common/SectionHeading'
@@ -61,17 +62,17 @@ export default function PriorityPlatforms() {
           <PriorityPlatform
             vessel={rib}
             className="priority-rib"
-            image="/images/home/priority-platforms/8m-rigid-inflatable-boat-1.webp"
+            image={asset('/images/home/priority-platforms/8m-rigid-inflatable-boat-1.webp')}
           />
           <PriorityPlatform
             vessel={airboat}
             className="priority-airboat"
-            image="/images/home/priority-platforms/airboat-1.webp"
+            image={asset('/images/home/priority-platforms/airboat-1.webp')}
           />
           <PriorityPlatform
             vessel={beb}
             className="priority-beb"
-            image="/images/home/priority-platforms/bridge-erection-boat-1.webp"
+            image={asset('/images/home/priority-platforms/bridge-erection-boat-1.webp')}
           />
         </div>
       </div>

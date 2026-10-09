@@ -1,3 +1,4 @@
+import { asset } from '@/utils/asset'
 import { Link } from 'react-router-dom'
 import Arrow from '@/components/common/Arrow'
 
@@ -5,7 +6,7 @@ export default function FinalCta() {
   return (
     <section className="final-cta">
       <div className="final-cta-media">
-        <img src="/images/home/define-your-next-vessel/23-8m-crew-boat-2.webp" alt="ITUS vessel at sea" />
+        <img src={asset('/images/home/define-your-next-vessel/23-8m-crew-boat-2.webp')} alt="ITUS vessel at sea" />
       </div>
       <div className="final-panel">
         <h2>

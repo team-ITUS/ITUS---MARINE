@@ -1,4 +1,4 @@
-import { defineConfig, type Plugin } from 'vite'
+import { defineConfig, loadEnv, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'node:path'
@@ -26,12 +26,22 @@ function productionHousekeeping(): Plugin {
   }
 }
 
-export default defineConfig({
-  plugins: [react(), tailwindcss(), productionHousekeeping()],
-  resolve: {
-    alias: { '@': path.resolve(__dirname, './src') },
-  },
-  server: {
-    host: true,
-  },
+/** Normalises VITE_BASE to "/" or "/folder/". */
+function resolveBase(value: string | undefined): string {
+  const trimmed = (value ?? '').trim().replace(/^\/+|\/+$/g, '')
+  return trimmed ? `/${trimmed}/` : '/'
+}
+
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, __dirname, '')
+  return {
+    base: resolveBase(env.VITE_BASE),
+    plugins: [react(), tailwindcss(), productionHousekeeping()],
+    resolve: {
+      alias: { '@': path.resolve(__dirname, './src') },
+    },
+    server: {
+      host: true,
+    },
+  }
 })

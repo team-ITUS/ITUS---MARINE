@@ -13,6 +13,7 @@ public/NewAssets/
 # Environment files (keep secrets out of git)
 .env
 .env.*
+!.env.production
 !.env.example
 
 # Logs
@@ -40,3 +41,6 @@ desktop.ini
 
 # Local assistant / scratch files
 .claude/
+
+# Local deployment archives
+*.zip

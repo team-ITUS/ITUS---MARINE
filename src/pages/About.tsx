@@ -1,3 +1,4 @@
+import { asset } from '@/utils/asset'
 import EditorialHero from '@/components/common/EditorialHero'
 import SectionHeading from '@/components/common/SectionHeading'
 import Seo from '@/components/common/Seo'
@@ -33,7 +34,7 @@ export default function About() {
       </section>
       <section className="about-story section-ivory">
         <div className="about-image-tall">
-          <img src="/images/about/10m-ambulance-boat-2.webp" alt="ITUS marine vessel" />
+          <img src={asset('/images/about/10m-ambulance-boat-2.webp')} alt="ITUS marine vessel" />
         </div>
         <div className="about-copy">
           <h2>One integrated marine ecosystem.</h2>
@@ -42,7 +43,7 @@ export default function About() {
             navigation and vessel systems around the project requirement, then
             supports the platform beyond delivery.
           </p>
-          <img src="/images/about/bridge-erection-boat-3.webp" alt="ITUS specialised marine craft" />
+          <img src={asset('/images/about/bridge-erection-boat-3.webp')} alt="ITUS specialised marine craft" />
         </div>
       </section>
       <section className="about-sectors section-dark">
