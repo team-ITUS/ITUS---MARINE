@@ -1,0 +1,188 @@
+/*
+ * Home page only — Figma "New Shipyard Website Design" (frame 61:2438, 1872px wide).
+ * Every rule is scoped under .home-page (see src/pages/Home.tsx) so shared classes
+ * such as .button, .text-action, .section-title and .draft-grid keep their current
+ * look on every other page. Values below are taken from the Figma design context.
+ */
+
+.home-page .button-row { display: flex; align-items: center; gap: 40px; }
+.home-page .button-row .button,
+.home-page .button-row .text-action { flex: none; white-space: nowrap; }
+
+/* ---------- Hero (61:2442) ---------- */
+.home-page .home-hero { height: 900px; min-height: 0; max-height: none; background: var(--carbon-black); }
+.home-page .home-hero-image { inset: 0; }
+.home-page .home-hero-image img { object-position: center; }
+.home-page .home-hero-image::after {
+  inset: 76px 0 0;
+  background: linear-gradient(202.7deg, rgba(255, 255, 255, 0) 47.864%, rgba(255, 255, 255, 0.5) 72.658%);
+}
+.home-page .home-hero-panel { background: none; color: var(--carbon-black); }
+.home-page .home-hero-panel h1 {
+  color: var(--carbon-black);
+  font-size: clamp(60px, 4.7vw, 88px);
+  line-height: .92;
+  letter-spacing: -.055em;
+}
+.home-page .home-hero-panel > p { max-width: 526px; color: var(--carbon-black); font-weight: 500; }
+.home-page .home-hero .button-row { margin-top: 30px; padding-bottom: 8px; }
+/* Figma sets the button arrow in the same oxide red as the button fill. */
+.home-page .home-hero .button-gold span[aria-hidden="true"] { color: var(--oxide-red); }
+.home-page .home-hero .text-action { color: var(--oxide-red); border-color: var(--oxide-red); }
+.home-page .home-hero .text-action:hover { color: var(--carbon-black); border-color: var(--carbon-black); }
+.home-page .home-hero-notes { color: var(--steel-blue); font-weight: 600; }
+.home-page .home-hero-notes span { border-left-color: var(--steel-blue); }
+
+@media (min-width: 821px) {
+  .home-page .home-hero-panel {
+    left: 3vw;
+    top: 271px;
+    width: min(600px, 62vw);
+    padding: 58px 74.88px 62px 0;
+  }
+  /* Figma sets the heading box at 580px for the 88px type, so it wraps to three lines. */
+  .home-page .home-hero-panel h1 { width: 6.59em; max-width: none; }
+  .home-page .home-hero-notes { left: 3vw; bottom: 45px; }
+}
+
+@media (max-width: 820px) {
+  .home-page .home-hero { height: 800px; }
+  .home-page .home-hero-image img { object-position: 68% center; }
+  /* No tablet/mobile frames exist in Figma: keep the dark type and wash the image behind it for legibility. */
+  .home-page .home-hero-image::after {
+    inset: 76px 0 0;
+    background: linear-gradient(180deg, rgba(247, 248, 246, .95) 0%, rgba(247, 248, 246, .9) 66%, rgba(247, 248, 246, 0) 94%);
+  }
+  .home-page .home-hero-panel { top: 110px; bottom: auto; }
+  .home-page .home-hero-panel h1 { font-size: 60px; }
+  .home-page .home-hero-notes { color: var(--carbon-black); }
+}
+
+@media (max-width: 560px) {
+  .home-page .home-hero { height: 760px; }
+  .home-page .home-hero-panel h1 { font-size: 46px; }
+  .home-page .button-row { align-items: flex-start; gap: 24px; }
+}
+
+/* ---------- Brand statement (61:2478) ---------- */
+.home-page .hull-figure {
+  position: absolute;
+  left: 39.23%;
+  top: 70.52px;
+  width: 1357.87px;
+  height: 565px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.home-page .hull-skew { flex: none; transform: scaleY(.97) skewX(-14deg); }
+.home-page .hull-outer,
+.home-page .hull-mid,
+.home-page .hull-inner { border: 1.015px solid var(--arctic-blue-grey); }
+.home-page .hull-outer {
+  position: relative;
+  width: 1217px;
+  height: 582.297px;
+  opacity: .22;
+  border-radius: 420.908px 84.182px 589.272px 168.363px;
+}
+.home-page .hull-mid,
+.home-page .hull-inner { position: absolute; display: block; }
+.home-page .hull-mid {
+  left: 145.98px; top: 69.56px; width: 923px; height: 441.103px;
+  border-radius: 319.037px 63.807px 446.651px 127.615px;
+}
+.home-page .hull-inner {
+  left: 303.98px; top: 145.32px; width: 607px; height: 289.602px;
+  border-radius: 209.636px 41.927px 293.49px 83.854px;
+}
+/*
+ * "Built." and "Sustained." are outlined words in the design. The fill matches the section
+ * background and is painted over the stroke, which hides the overlapping inner contours of
+ * the variable font and leaves a clean 1px outer outline.
+ */
+.home-page .statement-words span:nth-child(2),
+.home-page .statement-words span:nth-child(4) { color: var(--ice-grey); paint-order: stroke fill; -webkit-text-stroke-width: 2px; }
+.home-page .statement-words span:nth-child(2) { -webkit-text-stroke-color: var(--oxide-red); }
+.home-page .statement-words span:nth-child(4) { -webkit-text-stroke-color: var(--steel-blue); }
+
+/* ---------- Metrics (61:2501) ---------- */
+@media (min-width: 821px) {
+  .home-page .metrics-rail > div { padding: 48.3px 8% 0; gap: 9.4px 8px; align-content: flex-start; }
+  .home-page .metrics-rail strong { line-height: 1.2; }
+}
+.home-page .metrics-rail span { color: var(--ice-grey); }
+
+/* ---------- Priority platforms (61:2531) ---------- */
+.home-page .priority-copy > a { padding-bottom: 6px; }
+@media (min-width: 821px) {
+  /* Figma places the 1678x937 source at 1467px wide, offset -246px, inside the 877.5px tile. */
+  .home-page .priority-rib .priority-image img {
+    position: absolute;
+    top: 0;
+    left: -28.03%;
+    width: 167.18%;
+    max-width: none;
+    height: auto;
+    min-height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* ---------- Build timeline (61:2801) ---------- */
+.home-page .draft-grid {
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, .3) 1px, transparent 1px);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+/* ---------- Industry wall (61:2927) ---------- */
+.home-page .industry-wordmark {
+  display: block;
+  width: min(1444px, calc(100% - 40px));
+  height: auto;
+  aspect-ratio: 2 / 1;
+  margin: 0 auto;
+}
+
+/* ---------- Lifecycle (61:2973) ---------- */
+.home-page .lifecycle-journey span { line-height: 20px; }
+.home-page .lifecycle-journey strong { display: block; position: relative; top: -4px; height: 31.594px; }
+.home-page .lifecycle-journey > div { padding-bottom: 34px; }
+.home-page .lifecycle-journey i {
+  right: auto;
+  top: 66.03px;
+  left: 70%;
+  font: 400 16px/25.6px "Inter", sans-serif;
+}
+.home-page .lifecycle-journey > div:nth-child(2) i,
+.home-page .lifecycle-journey > div:nth-child(3) i { left: 74.55%; }
+.home-page .lifecycle-journey > div:nth-child(4) i { left: 79.09%; }
+
+/* ---------- Final CTA (61:3049) ---------- */
+.home-page .final-cta::after { content: none; }
+.home-page .final-cta-media { position: absolute; inset: 5vw; overflow: hidden; }
+.home-page .final-cta-media img {
+  position: absolute;
+  top: -43.83%;
+  left: 0;
+  width: 123.01%;
+  height: 202.05%;
+  max-width: none;
+  object-fit: cover;
+}
+.home-page .final-panel h2 { margin: 0; }
+.home-page .final-panel p { margin: 36px 0 12px; }
+.home-page .final-panel .button-row { gap: 24px; }
+.home-page .final-cta .button-row .text-action { position: relative; top: 3.5px; }
+
+@media (min-width: 821px) {
+  .home-page .final-cta { padding: 7vw 7vw 137.36px; }
+}
+@media (max-width: 820px) {
+  .home-page .final-cta-media { inset: 20px; }
+}
+@media (max-width: 560px) {
+  .home-page .final-cta-media { inset: 16px; }
+}

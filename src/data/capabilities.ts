@@ -1,0 +1,77 @@
+import type { CapabilityChapterData } from '@/types'
+
+export const capabilityChapters: CapabilityChapterData[] = [
+  {
+    id: 'shipbuilding',
+    title: 'Shipbuilding.',
+    items: [
+      'FRP construction',
+      'Hull moulding',
+      'Aluminium fabrication',
+      'Structural assembly',
+      'Lightweight construction',
+      'Modular configurations',
+    ],
+    image: '/images/capabilities/shipbuilding.webp',
+  },
+  {
+    id: 'engineering-integration',
+    title: 'Engineering & Integration.',
+    items: [
+      'Mechanical integration',
+      'Electrical integration',
+      'Navigation integration',
+      'Propulsion integration',
+      'Project-specific configuration',
+    ],
+    image: '/images/capabilities/engineering-integration.webp',
+  },
+  {
+    id: 'marine-systems',
+    title: 'Marine Systems.',
+    items: [
+      'Outboard propulsion',
+      'Inboard propulsion',
+      'Stern drive',
+      'Water jet',
+      'Yamaha',
+      'Tohatsu',
+      'Navigation',
+      'Communication',
+      'AIS',
+      'Vessel monitoring',
+      'Propeller guards',
+      'Boat trailers',
+      'Approved marine accessories',
+    ],
+    image: '/images/capabilities/marine-systems.webp',
+  },
+  {
+    id: 'testing-commissioning',
+    title: 'Testing & Commissioning.',
+    items: [
+      'Inspection',
+      'Sea trials',
+      'Systems verification',
+      'Commissioning',
+      'Documentation',
+      'Acceptance support',
+    ],
+    image: '/images/capabilities/testing-commissioning.webp',
+  },
+  {
+    id: 'lifecycle-support',
+    title: 'Beyond Delivery.',
+    items: [
+      'Aftersales support',
+      'Maintenance',
+      'Repair',
+      'Refit',
+      'Dry docking',
+      'Engine overhaul',
+      'Water-jet overhaul',
+      'Preventive maintenance',
+    ],
+    image: '/images/capabilities/lifecycle-support.webp',
+  },
+]
