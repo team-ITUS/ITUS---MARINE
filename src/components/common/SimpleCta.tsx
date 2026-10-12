@@ -6,7 +6,7 @@ export default function SimpleCta({ title }: { title: string }) {
     <section className="simple-cta">
       <div className="container">
         <h2>{title}</h2>
-        <Link className="button button-gold" to="/request-quote">
+        <Link className="button button-gold" to="/contact">
           Discuss Your Requirement <Arrow />
         </Link>
       </div>

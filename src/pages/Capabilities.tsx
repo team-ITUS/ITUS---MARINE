@@ -15,7 +15,7 @@ export default function Capabilities() {
       <EditorialHero
         title={
           <>
-            From Structure
+             Structure
             <br />
             to Systems.
           </>

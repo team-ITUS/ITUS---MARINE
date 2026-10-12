@@ -9,7 +9,7 @@ export default function RangePreview() {
     <section className="range-preview section-light">
       <div className="container">
         <div className="range-heading">
-          <SectionHeading title={'A\nComprehensive\nVessel Portfolio.'} />
+          <SectionHeading title={'\nComprehensive\nVessel Portfolio.'} />
           <Link className="text-action dark" to="/vessels">
             View All Vessels <Arrow />
           </Link>

@@ -14,7 +14,7 @@ export default function BuildTimeline() {
     <section className="build-timeline section-dark">
       <div className="draft-grid" aria-hidden="true" />
       <div className="container">
-        <SectionHeading title={'From Build to\nCommissioning.'} />
+        <SectionHeading title={'Building to\nCommissioning.'} />
         <div className="timeline">
           {processStages.map((stage, index) => (
             <div key={stage}>

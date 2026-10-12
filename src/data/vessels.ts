@@ -60,7 +60,7 @@ export const vessels: Vessel[] = [
     category: 'Special Craft',
     shortDescription: 'High-speed amphibious RIB platform engineered for rapid response across shorelines, shallow-water approaches and emergency evacuation environments.',
     longDescription: 'High-speed amphibious RIB platform engineered for rapid response across shorelines, shallow-water approaches and emergency evacuation environments. The vessel combines a high-speed rescue RIB hull with hydraulic land mobility, enabling launch, recovery and shore-to-water transitions where conventional craft may face access limitations.',
-    heroImage: asset('/images/vessels/amphibious-boat/amphibious-boat-1.webp'),
+    heroImage: asset('/images/vessels/amphibious-boat/amphibious-boat-3.webp'),
     galleryImages: [asset('/images/vessels/amphibious-boat/amphibious-boat-2.webp')],
     length: '10.2 m approx.',
     beam: '3.27 m',
@@ -233,7 +233,7 @@ export const vessels: Vessel[] = [
   {
     id: 'ship-06',
     slug: 'bridge-erection-boat',
-    brochureOrder: 4,
+    brochureOrder: 2,
     featured: true,
     priorityPlatform: true,
     name: 'Bridge Erection Boat (BEB)',
@@ -475,7 +475,7 @@ export const vessels: Vessel[] = [
   {
     id: 'ship-12',
     slug: '8m-rigid-inflatable-boat',
-    brochureOrder: 2,
+    brochureOrder: 4,
     featured: true,
     priorityPlatform: true,
     name: '8m Rigid Inflatable Boat',

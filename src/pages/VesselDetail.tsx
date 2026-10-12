@@ -133,10 +133,7 @@ export default function VesselDetail() {
         <div className="container">
           <h2>Interested in this platform?</h2>
           <div className="button-row">
-            <Link
-              className="button button-gold"
-              to={`/request-quote?vessel=${vessel.slug}`}
-            >
+            <Link className="button button-gold" to="/contact">
               Discuss This Vessel <Arrow />
             </Link>
           </div>

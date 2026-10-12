@@ -20,12 +20,9 @@ export default function FinalCta() {
           operational requirement.
         </p>
         <div className="button-row">
-          <Link className="button button-gold" to="/request-quote">
-            Discuss Your Requirement <Arrow />
-          </Link>
-          <Link className="text-action" to="/contact">
-            Contact ITUS Marine
-          </Link>
+          <Link className="button button-gold" to="/contact">
+                        Contact ITUS Marine <Arrow />
+          </Link>    
         </div>
       </div>
     </section>

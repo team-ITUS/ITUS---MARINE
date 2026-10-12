@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import ScrollToTopButton from '@/components/common/ScrollToTopButton'
 import Footer from './Footer'
 import Header from './Header'
 
@@ -9,6 +10,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
       <Header />
       <main>{children}</main>
       <Footer />
+      <ScrollToTopButton />
     </>
   )
 }

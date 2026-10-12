@@ -44,25 +44,21 @@ function PriorityPlatform({ vessel, className, image }: PriorityPlatformProps) {
 
 export default function PriorityPlatforms() {
   const amphibious = vessels.find((vessel) => vessel.brochureOrder === 1)!
-  const rib = vessels.find((vessel) => vessel.brochureOrder === 2)!
+  const beb = vessels.find((vessel) => vessel.brochureOrder === 2)!
   const airboat = vessels.find((vessel) => vessel.brochureOrder === 3)!
-  const beb = vessels.find((vessel) => vessel.brochureOrder === 4)!
+  const rib = vessels.find((vessel) => vessel.brochureOrder === 4)!
   return (
     <section className="priority-platforms section-ivory">
       <div className="container">
         <SectionHeading title={'Platforms for Demanding\nWaters.'} />
-        <Link className="flagship-reference" to={`/vessels/${amphibious.slug}`}>
-          <span>01 / Flagship Platform</span>
-          <strong>{amphibious.name}</strong>
-          <small>
-            Explore the primary amphibious platform <Arrow />
-          </small>
-        </Link>
+        <div className="priority-flagship-wrap">
+          <PriorityPlatform vessel={amphibious} className="priority-flagship" />
+        </div>
         <div className="priority-composition">
           <PriorityPlatform
-            vessel={rib}
+            vessel={beb}
             className="priority-rib"
-            image={asset('/images/home/priority-platforms/8m-rigid-inflatable-boat-1.webp')}
+            image={asset('/images/home/priority-platforms/bridge-erection-boat-1.webp')}
           />
           <PriorityPlatform
             vessel={airboat}
@@ -70,9 +66,9 @@ export default function PriorityPlatforms() {
             image={asset('/images/home/priority-platforms/airboat-1.webp')}
           />
           <PriorityPlatform
-            vessel={beb}
+            vessel={rib}
             className="priority-beb"
-            image={asset('/images/home/priority-platforms/bridge-erection-boat-1.webp')}
+            image={asset('/images/home/priority-platforms/8m-rigid-inflatable-boat-1.webp')}
           />
         </div>
       </div>

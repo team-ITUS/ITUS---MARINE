@@ -12,14 +12,13 @@ export default function BrandStatement() {
       <div className="container statement-grid">
         <div className="statement-words">
           <span>Engineered.</span>
-          <span>Built.</span>
           <span>Integrated.</span>
           <span>Sustained.</span>
         </div>
         <div className="statement-copy">
           <p>
             ITUS consolidates vessel construction, marine engineering, systems
-            integration and through-life support within a unified capability
+            integration and through‑life support within a unified capability
             tailored to specialised maritime requirements.
           </p>
         </div>

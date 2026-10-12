@@ -17,7 +17,7 @@ npm run preview    # serve the production build
 
 | What | Where |
 | --- | --- |
-| Pages (one file per route) | `src/pages/` — Home, Vessels, VesselDetail, Capabilities, About, Contact, RequestQuote, NotFound |
+| Pages (one file per route) | `src/pages/` — Home, Vessels, VesselDetail, Capabilities, About, Contact, NotFound |
 | Routes | `src/routes/AppRoutes.tsx` |
 | Header / Footer / page shell | `src/components/layout/` |
 | Reusable pieces (headings, form field, SEO, CTA) | `src/components/common/` |

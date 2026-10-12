@@ -5,7 +5,6 @@ import Capabilities from '@/pages/Capabilities'
 import Contact from '@/pages/Contact'
 import Home from '@/pages/Home'
 import NotFound from '@/pages/NotFound'
-import RequestQuote from '@/pages/RequestQuote'
 import VesselDetail from '@/pages/VesselDetail'
 import Vessels from '@/pages/Vessels'
 
@@ -24,7 +23,6 @@ export default function AppRoutes() {
       <Route path="/capabilities" element={<Capabilities />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
-      <Route path="/request-quote" element={<RequestQuote />} />
 
       {/* Legacy URLs from the earlier site structure */}
       <Route

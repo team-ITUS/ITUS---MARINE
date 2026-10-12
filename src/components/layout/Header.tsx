@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import Arrow from '@/components/common/Arrow'
 import Brand from '@/components/common/Brand'
 import { primaryNav, rescueUrl } from '@/data/navigation'
@@ -47,9 +47,6 @@ export default function Header() {
           <a href={rescueUrl} target="_blank" rel="noopener noreferrer">
             Rescue Products <Arrow />
           </a>
-          <Link className="quote-link" to="/request-quote">
-            Request a Quote
-          </Link>
         </div>
         <button
           className="menu-toggle"
@@ -72,9 +69,6 @@ export default function Header() {
             </NavLink>
           ))}
         </nav>
-        <Link className="button button-gold" to="/request-quote">
-          Request a Quote
-        </Link>
         <a href={rescueUrl} target="_blank" rel="noopener noreferrer">
           Rescue Products <Arrow />
         </a>

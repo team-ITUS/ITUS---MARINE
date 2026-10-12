@@ -16,7 +16,7 @@ export default function HomeHero({ vessel }: { vessel: Vessel }) {
           Demanding Waters.
         </h1>
         <p>
-          Integrated vessel engineering, shipbuilding and marine-systems
+          Integrated vessel engineering,shipbuilding and marine‑system
           capability for government, defence, commercial and specialised
           maritime requirements.
         </p>
@@ -30,10 +30,10 @@ export default function HomeHero({ vessel }: { vessel: Vessel }) {
         </div>
       </div>
       <div className="home-hero-notes">
-        <span>Amphibious Platform</span>
-        <span>Land + Water Mobility</span>
-        <span>FRP / GRP</span>
-        <span>Twin Outboard</span>
+        <span>AMPHIBIOUS PLATFORM</span>
+        <span>RAPID RESPONSE</span>
+        <span>RESCUE & EVACUATION</span>
+        <span>SPECIAL OPERATIONS</span>
       </div>
     </section>
   )

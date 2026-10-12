@@ -38,7 +38,6 @@ export default function Footer() {
           <Link to="/contact">Contact</Link>
         </FooterGroup>
         <FooterGroup title="Resources">
-          <Link to="/request-quote">Request a Quote</Link>
           <a href={rescueUrl} target="_blank" rel="noopener noreferrer">
             ITUS Rescue <Arrow />
           </a>
