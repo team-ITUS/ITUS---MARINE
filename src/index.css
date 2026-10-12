@@ -719,20 +719,3 @@ body { font-size: 16px; line-height: 1.6; }
 .scroll-top:hover { background: #ba574b; border-color: #ba574b; }
 .scroll-top:focus-visible { outline: 2px solid var(--pure-white); outline-offset: 2px; box-shadow: 0 0 0 4px var(--oxide-red); }
 @media (max-width: 560px) { .scroll-top { right: 16px; bottom: 16px; } }
-
-/* Transparent header over light backgrounds: dark text until the header turns solid on scroll. */
-.header-on-light:not(.header-solid) .brand strong,
-.header-on-light:not(.header-solid) .brand span,
-.header-on-light:not(.header-solid) .primary-nav a,
-.header-on-light:not(.header-solid) .primary-nav a.active,
-.header-on-light:not(.header-solid) .primary-nav a:hover,
-.header-on-light:not(.header-solid) .header-tools > a:first-child { color: var(--carbon-black); }
-.header-on-light:not(.header-solid) .menu-toggle { border-color: var(--carbon-black); }
-.header-on-light:not(.header-solid) .menu-toggle span { background: var(--carbon-black); }
-@media (min-width: 821px) {
-  /* Contact: photo on the left (logo stays white), light panel on the right (nav goes dark). */
-  .header-split:not(.header-solid) .primary-nav a,
-  .header-split:not(.header-solid) .primary-nav a.active,
-  .header-split:not(.header-solid) .primary-nav a:hover,
-  .header-split:not(.header-solid) .header-tools > a:first-child { color: var(--carbon-black); }
-}
