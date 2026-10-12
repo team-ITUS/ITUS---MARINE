@@ -79,7 +79,7 @@ button { color: inherit; }
 @media (max-width: 820px) { .header { --header-gutter: 20px; } }
 @media (max-width: 560px) { .header { --header-gutter: 16px; } }
 @media (min-width: 1101px) {
-  .header .header-shell { grid-template-columns: auto 1fr auto; gap: clamp(24px, 3vw, 56px); }
+  .header .header-shell { grid-template-columns: auto 1fr auto; gap: clamp(20px, 2vw, 38px); }
   .header .primary-nav { justify-self: end; }
 }
 
@@ -310,17 +310,17 @@ button { color: inherit; }
 .empty h2 { font: 600 42px "Instrument Sans"; color: var(--carbon-black); }
 .empty p { color: var(--slate-grey); }
 
-.vessel-detail-hero { position: relative; min-height: 850px; height: 95svh; display: flex; align-items: flex-end; color: var(--pure-white); background: var(--carbon-black); overflow: hidden; }
+.vessel-detail-hero { position: relative; min-height: 640px; height: 100svh; max-height: 1000px; display: flex; align-items: flex-end; color: var(--pure-white); background: var(--carbon-black); overflow: hidden; }
 .vessel-detail-hero > img { position: absolute; inset: 0; height: 100%; object-fit: cover; }
 .detail-shade { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(14,20,24,.95), rgba(14,20,24,.05) 78%); }
-.vessel-detail-title { position: relative; padding-bottom: 75px; }
-.crumbs { display: flex; gap: 10px; color: var(--pure-white); font-size: 9px; margin-bottom: 42px; }
+.vessel-detail-title { position: relative; padding-bottom: clamp(40px, 7svh, 75px); }
+.crumbs { display: flex; gap: 10px; color: var(--pure-white); font-size: 9px; margin-bottom: clamp(24px, 4svh, 42px); }
 .crumbs a:hover { opacity: .8; }
 .vessel-detail-title .label { color: var(--pure-white); }
 .vessel-detail-title .label i { background: var(--pure-white); }
 .crumbs b { color: var(--pure-white); font-weight: 500; }
 .vessel-detail-title > small { display: block; margin-top: 28px; color: var(--oxide-red); text-transform: uppercase; letter-spacing: .16em; font-size: 9px; font-weight: 600; }
-.vessel-detail-title h1 { margin: 10px 0 18px; font: 600 clamp(56px, 7vw, 96px)/.92 "Instrument Sans"; letter-spacing: -.055em; color: var(--pure-white); }
+.vessel-detail-title h1 { margin: 10px 0 18px; font: 600 clamp(56px, min(7vw, 11svh), 96px)/.92 "Instrument Sans"; letter-spacing: -.055em; color: var(--pure-white); }
 .vessel-detail-title p { max-width: 660px; color: var(--ice-grey); line-height: 1.7; }
 .spec-rail { background: var(--pure-white); border-bottom: 1px solid var(--technical-border); }
 .spec-rail .container { display: flex; overflow-x: auto; }
@@ -337,9 +337,16 @@ button { color: inherit; }
 .detail-image span { position: absolute; right: 18px; bottom: 18px; color: var(--pure-white); background: var(--carbon-black); padding: 9px 12px; text-transform: uppercase; letter-spacing: .12em; font-size: 7px; }
 .detail-content { padding: 160px 0; background: var(--polar-white); }
 .detail-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 10%; }
+@media (min-width: 821px) {
+  /* Both columns share the same three rows (count, heading, list) so their lists start on one line. */
+  .detail-columns { gap: 0 10%; }
+  .detail-columns > div { display: grid; grid-template-rows: subgrid; grid-row: span 3; align-content: start; }
+}
 .line-list { list-style: none; padding: 0; margin: 50px 0 0; border-top: 1px solid var(--technical-border); }
 .line-list li { position: relative; padding: 14px 0 14px 24px; border-bottom: 1px solid var(--technical-border); color: var(--slate-grey); font-size: 12px; line-height: 1.5; }
 .line-list li::before { content: "—"; position: absolute; left: 0; color: var(--oxide-red); font-weight: 600; }
+.detail-columns .line-list { margin-top: 40px; }
+.detail-columns .line-list li { padding-block: 18px; line-height: 1.4; }
 .technical-specs { padding: 160px 0; background: var(--polar-white); }
 .specs-layout { display: grid; grid-template-columns: .75fr 1.25fr; gap: 10%; }
 .spec-table { border-top: 2px solid var(--steel-blue); }
@@ -443,7 +450,9 @@ button { color: inherit; }
 /* Institutional readability */
 body { font-size: 16px; line-height: 1.6; }
 .primary-nav a { font-size: 14px; letter-spacing: .04em; }
-.header-tools > a:first-child { font-size: 13px; letter-spacing: .04em; }
+.header-tools > a:first-child { position: relative; font-size: 14px; letter-spacing: .04em; }
+.header-tools > a:first-child::after { content: ""; position: absolute; left: 0; top: 27px; width: 0; height: 1px; background: var(--oxide-red); transition: width .25s; }
+.header-tools > a:first-child:hover::after { width: 100%; }
 .button { min-height: 48px; font-size: 14px; letter-spacing: .04em; }
 .text-action { font-size: 14px; letter-spacing: .04em; }
 .label { font-size: 13px; letter-spacing: .12em; }
@@ -710,3 +719,20 @@ body { font-size: 16px; line-height: 1.6; }
 .scroll-top:hover { background: #ba574b; border-color: #ba574b; }
 .scroll-top:focus-visible { outline: 2px solid var(--pure-white); outline-offset: 2px; box-shadow: 0 0 0 4px var(--oxide-red); }
 @media (max-width: 560px) { .scroll-top { right: 16px; bottom: 16px; } }
+
+/* Transparent header over light backgrounds: dark text until the header turns solid on scroll. */
+.header-on-light:not(.header-solid) .brand strong,
+.header-on-light:not(.header-solid) .brand span,
+.header-on-light:not(.header-solid) .primary-nav a,
+.header-on-light:not(.header-solid) .primary-nav a.active,
+.header-on-light:not(.header-solid) .primary-nav a:hover,
+.header-on-light:not(.header-solid) .header-tools > a:first-child { color: var(--carbon-black); }
+.header-on-light:not(.header-solid) .menu-toggle { border-color: var(--carbon-black); }
+.header-on-light:not(.header-solid) .menu-toggle span { background: var(--carbon-black); }
+@media (min-width: 821px) {
+  /* Contact: photo on the left (logo stays white), light panel on the right (nav goes dark). */
+  .header-split:not(.header-solid) .primary-nav a,
+  .header-split:not(.header-solid) .primary-nav a.active,
+  .header-split:not(.header-solid) .primary-nav a:hover,
+  .header-split:not(.header-solid) .header-tools > a:first-child { color: var(--carbon-black); }
+}

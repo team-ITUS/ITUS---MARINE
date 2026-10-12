@@ -21,6 +21,7 @@ export default function Capabilities() {
           </>
         }
         intro="Integrated shipbuilding, marine engineering, systems integration, commissioning and lifecycle support."
+        compact
       />
       <nav className="chapter-nav" aria-label="Capability chapters">
         <div className="container">

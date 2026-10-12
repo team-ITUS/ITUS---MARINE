@@ -29,7 +29,7 @@ export default function Header() {
   }, [])
 
   return (
-    <header className={`header ${scrolled ? 'header-solid' : ''}`}>
+    <header className={`header ${scrolled ? 'header-solid' : ''} ${pathname === '/' ? 'header-on-light' : ''} ${pathname === '/contact' ? 'header-split' : ''}`}>
       <div className="header-shell">
         <Brand />
         <nav className="primary-nav" aria-label="Primary navigation">

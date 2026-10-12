@@ -21,6 +21,7 @@ export default function About() {
           </>
         }
         intro="A vessel manufacturing and marine engineering organisation serving professional, commercial, emergency-response and leisure applications."
+        compact
       />
       <section className="about-statement section-light">
         <div className="container">

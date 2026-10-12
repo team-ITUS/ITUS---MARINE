@@ -70,7 +70,7 @@ export default function VesselDetail() {
           <div className="container detail-columns">
             <div>
               <b>02</b>
-              <SectionHeading title="Designed to Perform." />
+              <SectionHeading title={'Designed to\nPerform.'} />
               <ul className="line-list">
                 {vessel.missionApplications.map((item) => (
                   <li key={item}>{item}</li>
@@ -80,7 +80,7 @@ export default function VesselDetail() {
             {vessel.keyFeatures.length > 0 && (
               <div>
                 <b>03</b>
-                <SectionHeading title="Key Features." />
+                <SectionHeading title={'Key\nFeatures.'} />
                 <ul className="line-list">
                   {vessel.keyFeatures.map((item) => (
                     <li key={item}>{item}</li>
