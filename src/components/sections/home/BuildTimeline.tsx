@@ -1,4 +1,5 @@
 import SectionHeading from '@/components/common/SectionHeading'
+import { revealDelay, useReveal } from '@/hooks/useReveal'
 
 const processStages = [
   'Hull Moulding & Assembly',
@@ -10,17 +11,29 @@ const processStages = [
 ]
 
 export default function BuildTimeline() {
+  const ref = useReveal<HTMLElement>()
   return (
-    <section className="build-timeline section-dark">
-      <div className="draft-grid" aria-hidden="true" />
-      <div className="container">
-        <SectionHeading title={'Building to\nCommissioning.'} />
-        <div className="timeline">
+    <section ref={ref} className="relative overflow-hidden bg-carbon-black pb-[175px] pt-[150px] text-white">
+      <div
+        className="draft-grid bg-no-repeat [background-image:linear-gradient(180deg,rgba(255,255,255,.3)_1px,transparent_1px)] [background-size:100%_100%]"
+        aria-hidden="true"
+      />
+      <div className="container-site relative">
+        <div className="reveal">
+          <SectionHeading title={'Building to\nCommissioning.'} />
+        </div>
+        <div className="mt-[100px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 lg:border-t lg:border-steel-blue">
           {processStages.map((stage, index) => (
-            <div key={stage}>
-              <b>0{index + 1}</b>
-              <i />
-              <span>{stage}</span>
+            <div
+              key={stage}
+              style={revealDelay(150 + index * 80)}
+              className="reveal relative min-h-40 border-t border-steel-blue pl-3.5 pr-5 pt-9 sm:min-h-[220px] sm:pl-0 lg:border-t-0"
+            >
+              <b className="block font-display text-[64px] font-medium leading-[normal] text-oxide-red">0{index + 1}</b>
+              <i className="absolute -top-[5px] h-[9px] w-[9px] rotate-45 border border-oxide-red bg-oxide-red" />
+              <span className="block max-w-[175px] font-display text-lg font-medium leading-[1.35] text-ice-grey">
+                {stage}
+              </span>
             </div>
           ))}
         </div>

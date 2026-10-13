@@ -13,7 +13,9 @@ export default function ScrollToTopButton() {
 
   return (
     <button
-      className={`scroll-top ${visible ? 'visible' : ''}`}
+      className={`fixed bottom-4 right-4 z-40 grid h-11 w-11 cursor-pointer place-items-center border border-oxide-red bg-oxide-red p-0 text-white transition-[opacity,transform,background-color,border-color] duration-300 hover:border-oxide-red-hover hover:bg-oxide-red-hover focus-visible:shadow-[0_0_0_4px_var(--color-oxide-red)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:bottom-6 sm:right-6 ${
+        visible ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
+      }`}
       type="button"
       aria-label="Scroll to top"
       tabIndex={visible ? 0 : -1}

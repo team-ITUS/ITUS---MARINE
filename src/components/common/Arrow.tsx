@@ -1,3 +1,7 @@
-export default function Arrow() {
-  return <span aria-hidden="true">↗</span>
+export default function Arrow({ className }: { className?: string }) {
+  return (
+    <span aria-hidden="true" className={className}>
+      ↗
+    </span>
+  )
 }

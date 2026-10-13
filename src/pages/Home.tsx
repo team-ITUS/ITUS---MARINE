@@ -1,4 +1,3 @@
-import '@/styles/home.css'
 import Seo from '@/components/common/Seo'
 import MainLayout from '@/components/layout/MainLayout'
 import BrandStatement from '@/components/sections/home/BrandStatement'
@@ -21,7 +20,7 @@ export default function Home() {
         title="ITUS Marine | Shipyard & Vessel Engineering"
         description="ITUS Marine provides vessel manufacturing, marine engineering, systems integration and lifecycle support across professional, commercial, rescue and leisure marine applications."
       />
-      <div className="home-page">
+      <div>
         <HomeHero vessel={hero} />
         <BrandStatement />
         <Metrics />

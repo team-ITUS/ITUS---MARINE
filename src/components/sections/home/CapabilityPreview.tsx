@@ -1,6 +1,7 @@
 import { asset } from '@/utils/asset'
 import { Link } from 'react-router-dom'
 import Arrow from '@/components/common/Arrow'
+import { revealDelay, useReveal } from '@/hooks/useReveal'
 
 const chapters = [
   [
@@ -26,24 +27,28 @@ const chapters = [
 ]
 
 export default function CapabilityPreview() {
+  const ref = useReveal<HTMLElement>()
   return (
-    <section className="capability-preview section-ivory">
-      <div className="capability-visual">
+    <section ref={ref} className="grid min-h-[850px] grid-cols-1 bg-polar-white md:grid-cols-2 lg:grid-cols-[58%_42%]">
+      <div className="reveal reveal-opacity relative min-h-[480px] min-w-0 sm:min-h-[650px] md:min-h-0">
         <img
+          className="h-full object-cover"
           src={asset('/images/home/from-building-to-commissioning/amphibious-boat-2.webp')}
           alt="ITUS amphibious vessel platform"
         />
-        <span>Integrated Marine Capability</span>
+        <span className="absolute bottom-7 left-7 bg-carbon-black/80 px-3 py-2 text-xs uppercase tracking-[.06em] text-white">
+          Integrated Marine Capability
+        </span>
       </div>
-      <div className="capability-index">
+      <div className="px-6 py-20 sm:px-[5vw] sm:py-[90px] lg:px-[7vw] lg:py-[110px]">
         {chapters.map(([title, detail], index) => (
-          <div key={title}>
-            <b>0{index + 1}</b>
-            <h3>{title}</h3>
-            <p>{detail}</p>
+          <div key={title} style={revealDelay(index * 80)} className="reveal grid grid-cols-[45px_1fr] border-t border-technical-border py-[25px]">
+            <b className="row-span-2 text-[13px] font-semibold text-oxide-red">0{index + 1}</b>
+            <h3 className="m-0 font-display text-xl font-medium uppercase leading-[normal] text-steel-blue">{title}</h3>
+            <p className="mt-2.5 text-base leading-[1.55] text-slate-grey">{detail}</p>
           </div>
         ))}
-        <Link className="text-action dark" to="/capabilities">
+        <Link className="action action-dark reveal mt-9" style={revealDelay(450)} to="/capabilities">
           Explore Capabilities <Arrow />
         </Link>
       </div>
