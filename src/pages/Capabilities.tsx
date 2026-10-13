@@ -5,6 +5,7 @@ import MainLayout from '@/components/layout/MainLayout'
 import CapabilityChapter from '@/components/sections/CapabilityChapter'
 import { capabilityChapters } from '@/data/capabilities'
 import { useReveal } from '@/hooks/useReveal'
+import { asset } from '@/utils/asset'
 
 export default function Capabilities() {
   const ref = useReveal<HTMLDivElement>()
@@ -24,6 +25,12 @@ export default function Capabilities() {
         }
         intro="Integrated shipbuilding, marine engineering, systems integration, commissioning and lifecycle support."
         compact
+        video={{
+          src: asset('/videos/Capabilties/capabilities-hero.mp4'),
+          poster: asset('/videos/Capabilties/capabilities-hero-poster.jpg'),
+          label: 'Aerial view of a boat on the shoreline',
+          position: '48% center',
+        }}
       />
       <nav
         className="sticky top-[70px] z-20 border-b border-technical-border bg-white sm:top-[76px]"

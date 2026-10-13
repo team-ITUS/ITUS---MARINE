@@ -24,6 +24,12 @@ export default function About() {
         }
         intro="A vessel manufacturing and marine engineering organisation serving professional, commercial, emergency-response and leisure applications."
         compact
+        video={{
+          src: asset('/videos/About/about-hero.mp4'),
+          poster: asset('/videos/About/about-hero-poster.jpg'),
+          label: 'Boat resting on a beach at dusk',
+          position: '35% center',
+        }}
       />
       <div ref={ref}>
       <section className="bg-polar-white py-[100px] md:py-40">

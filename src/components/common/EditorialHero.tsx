@@ -1,20 +1,66 @@
-import type { ReactNode } from 'react'
+import { useEffect, useRef, type ReactNode } from 'react'
 import { revealDelay } from '@/hooks/useReveal'
+
+interface EditorialHeroVideo {
+  src: string
+  poster: string
+  label: string
+  /** CSS object-position for the video; keep the subject in frame on narrow screens. */
+  position?: string
+}
 
 interface EditorialHeroProps {
   title: ReactNode
   intro: string
   compact?: boolean
+  video?: EditorialHeroVideo
 }
 
-export default function EditorialHero({ title, intro, compact = false }: EditorialHeroProps) {
+export default function EditorialHero({ title, intro, compact = false, video }: EditorialHeroProps) {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  // Reduced-motion users keep the poster frame instead of the looping background video.
+  useEffect(() => {
+    const el = videoRef.current
+    if (!el) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) el.pause()
+    else el.play().catch(() => {})
+  }, [video?.src])
+
+  const height = video
+    ? 'min-h-[min(88svh,860px)] pb-[90px] pt-[180px]'
+    : compact
+      ? 'min-h-[500px] pb-[72px] pt-[155px]'
+      : 'min-h-[650px] pb-[100px] pt-[180px]'
+
   return (
     <section
-      className={`relative flex items-end overflow-hidden bg-steel-blue text-white max-sm:min-h-[560px] max-sm:pb-[75px] max-sm:pt-[150px] ${
-        compact ? 'min-h-[500px] pb-[72px] pt-[155px]' : 'min-h-[650px] pb-[100px] pt-[180px]'
-      }`}
+      className={`relative flex items-end overflow-hidden bg-steel-blue text-white max-sm:min-h-[560px] max-sm:pb-[75px] max-sm:pt-[150px] ${height}`}
     >
-      <div className="draft-grid" aria-hidden="true" />
+      {video ? (
+        <>
+          <video
+            ref={videoRef}
+            className="absolute inset-0 h-full w-full object-cover"
+            style={{ objectPosition: video.position ?? 'center' }}
+            poster={video.poster}
+            muted
+            loop
+            playsInline
+            autoPlay
+            preload="auto"
+            aria-label={video.label}
+          >
+            <source src={video.src} type="video/mp4" />
+          </video>
+          <div
+            className="absolute inset-0 bg-[linear-gradient(to_top,rgba(8,20,32,.82)_0%,rgba(8,20,32,.45)_38%,rgba(8,20,32,.12)_65%,rgba(8,20,32,.35)_100%)]"
+            aria-hidden="true"
+          />
+        </>
+      ) : (
+        <div className="draft-grid" aria-hidden="true" />
+      )}
       <div className="container-site relative">
         <h1
           style={revealDelay(150)}

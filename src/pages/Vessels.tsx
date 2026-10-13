@@ -8,6 +8,7 @@ import { vesselFilters } from '@/data/navigation'
 import { orderedVessels as vessels } from '@/data/vessels'
 import { revealDelay, useReveal } from '@/hooks/useReveal'
 import type { VesselApplication } from '@/types'
+import { asset } from '@/utils/asset'
 
 export default function Vessels() {
   const location = useLocation()
@@ -59,6 +60,12 @@ export default function Vessels() {
         title="Purpose-Built Platforms."
         intro="Explore ITUS vessel platforms across professional, commercial, emergency-response and specialised marine applications."
         compact
+        video={{
+          src: asset('/videos/VesselHero/vessel-hero.mp4'),
+          poster: asset('/videos/VesselHero/vessel-hero-poster.jpg'),
+          label: 'ITUS vessel cruising on open water',
+          position: '60% center',
+        }}
       />
       <div ref={ref}>
       <section ref={barRef} className="top-[76px] z-20 border-b border-technical-border bg-white lg:sticky">
