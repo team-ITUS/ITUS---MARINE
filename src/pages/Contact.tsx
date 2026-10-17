@@ -48,7 +48,7 @@ export default function Contact() {
               <FormField label="Name">
                 <input className={fieldClass} name="name" required autoComplete="name" />
               </FormField>
-              <FormField label="Organisation Name">
+              <FormField label="Organisation">
                 <input className={fieldClass} name="organisation" required autoComplete="organization" />
               </FormField>
               {/* Side by side from sm up so the extra field doesn't push the form past one screen. */}
