@@ -32,16 +32,17 @@ export default function Capabilities() {
           position: '48% center',
         }}
       />
+      {/* Phones and tablets show every chapter in a static grid; lg pins them as one sticky row. */}
       <nav
-        className="sticky top-[70px] z-20 border-b border-technical-border bg-white sm:top-[76px]"
+        className="relative z-20 border-b border-technical-border bg-white lg:sticky lg:top-[76px]"
         aria-label="Capability chapters"
       >
-        <div className="container-site flex overflow-x-auto [scrollbar-width:none]">
+        <div className="container-site grid grid-cols-2 max-lg:-mb-px max-sm:w-full sm:grid-cols-5 sm:border-l sm:border-technical-border lg:flex lg:overflow-x-auto lg:[scrollbar-width:none]">
           {capabilityChapters.map((chapter, index) => (
             <a
               key={chapter.id}
               href={`#${chapter.id}`}
-              className="min-w-[170px] flex-auto shrink-0 whitespace-nowrap border-r border-technical-border px-4 py-6 text-[13px] uppercase tracking-[.03em] text-steel-blue first:border-l hover:bg-ice-grey hover:text-carbon-black"
+              className="border-b border-r border-technical-border px-4 py-5 text-[13px] uppercase leading-[1.4] tracking-[.03em] text-steel-blue hover:bg-ice-grey hover:text-carbon-black max-sm:even:border-r-0 max-sm:last:odd:col-span-2 max-sm:last:odd:border-r-0lg:min-w-[170px] lg:flex-auto lg:shrink-0 lg:whitespace-nowrap lg:border-b-0 lg:py-6 lg:leading-normal"
             >
               <span className="mb-[7px] block font-semibold text-oxide-red">0{index + 1}</span>
               {chapter.title.replace('.', '')}

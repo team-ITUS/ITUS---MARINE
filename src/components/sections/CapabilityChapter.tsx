@@ -11,7 +11,7 @@ export default function CapabilityChapter({ chapter, index }: CapabilityChapterP
   return (
     <section
       id={chapter.id}
-      className={`min-h-[900px] scroll-mt-[150px] overflow-hidden py-[100px] sm:py-[150px] ${
+      className={`min-h-[900px] scroll-mt-[70px] overflow-hidden sm:scroll-mt-[76px] lg:scroll-mt-[150px] py-[100px] sm:py-[150px] ${
         dark ? 'bg-carbon-black text-white' : 'bg-polar-white'
       }`}
     >

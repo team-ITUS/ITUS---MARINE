@@ -51,8 +51,9 @@ export default function About() {
           />
         </div>
         {/* Right edge lines up with the header container (and its Rescue Products button). */}
-        <div className="px-6 py-[90px] sm:px-[7vw] sm:py-[120px] md:pl-[5vw] md:pr-[max(40px,calc((100cqw-1280px)/2))]">
-          <h2 className="reveal my-[30px] font-display text-[clamp(42px,4vw,60px)] font-semibold leading-none tracking-[-.04em] text-carbon-black">
+        {/* Phones: 16px site gutter and a short gap under the photo so the heading reads with it. */}
+        <div className="px-4 pb-[90px] pt-12 sm:px-[7vw] sm:py-[120px] md:pl-[5vw] md:pr-[max(40px,calc((100cqw-1280px)/2))]">
+          <h2 className="reveal mb-[30px] mt-0 font-display sm:mt-[30px] text-[clamp(42px,4vw,60px)] font-semibold leading-none tracking-[-.04em] text-carbon-black">
             One integrated marine ecosystem.
           </h2>
           <p style={revealDelay(100)} className="reveal text-[17px] leading-[1.7] text-slate-grey">

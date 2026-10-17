@@ -31,10 +31,10 @@ export default function BuildTimeline() {
               key={stage}
               /* Phones and tablets keep the short stagger; on lg each stage reveals as the boat reaches its marker. */
               style={{ '--d-sm': `${150 + index * 80}ms`, '--d-lg': `${SAIL_START + index * SAIL_STEP - 200}ms` } as CSSProperties}
-              className="reveal timeline-stage relative min-h-40 border-t border-steel-blue pl-3.5 pr-5 pt-9 sm:min-h-[220px] sm:pl-0 lg:border-t-0"
+              className="reveal timeline-stage relative min-h-40 border-t border-steel-blue pb-9 pl-3.5 pr-5 pt-9 sm:min-h-[220px] sm:pb-0 sm:pl-0 lg:border-t-0"
             >
               <b className="block font-display text-[64px] font-medium leading-[normal] text-oxide-red">0{index + 1}</b>
-              <i className="absolute -top-[5px] h-[9px] w-[9px] rotate-45 border border-oxide-red bg-oxide-red" />
+              <i className="absolute -top-[5px] left-0 h-[9px] w-[9px] rotate-45 border border-oxide-red bg-oxide-red" />
               <span className="block max-w-[175px] font-display text-lg font-medium leading-[1.35] text-ice-grey">
                 {stage}
               </span>

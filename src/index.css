@@ -73,7 +73,8 @@
   .action-dark [aria-hidden="true"] { color: var(--color-oxide-red); }
 
   /* Homepage hero: light wash that keeps the dark headline legible over the photograph. */
-  .hero-wash { background: linear-gradient(180deg, rgba(247, 248, 246, .95) 0%, rgba(247, 248, 246, .9) 66%, rgba(247, 248, 246, 0) 94%); }
+  /* Mobile: densest behind the heading and copy only; light under the header and clear over the lower photo. */
+  .hero-wash { background: linear-gradient(180deg, rgba(247, 248, 246, .3) 0%, rgba(247, 248, 246, .78) 14%, rgba(247, 248, 246, .72) 50%, rgba(247, 248, 246, .3) 63%, rgba(247, 248, 246, 0) 76%); }
   @media (width >= 64rem) {
     .hero-wash {
       background:

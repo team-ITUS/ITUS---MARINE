@@ -46,7 +46,8 @@ export default function VesselDetail() {
       <div ref={ref} key={slug}>
       <section className="relative flex h-svh max-h-[1000px] min-h-[720px] items-end overflow-hidden bg-carbon-black text-white sm:min-h-[640px]">
         <img ref={heroImageRef} className="hero-bg absolute inset-0 h-full object-cover" src={vessel.heroImage} alt={`${vessel.name} at sea`} />
-        <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(14,20,24,.95),rgba(14,20,24,.05)_78%)]" />
+        {/* Phones stack the hero text higher up the photo, so the shade stays dense further up before fading. */}
+        <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(14,20,24,.95),rgba(14,20,24,.85)_45%,rgba(14,20,24,.4)_66%,rgba(14,20,24,.05)_86%)] sm:bg-[linear-gradient(0deg,rgba(14,20,24,.95),rgba(14,20,24,.05)_78%)]" />
         <div className="container-site relative pb-[clamp(40px,7svh,75px)]">
           <div className="hero-reveal mb-[clamp(24px,4svh,42px)] flex gap-2.5 text-xs" style={revealDelay(150)}>
             <Link className="hover:opacity-80" to="/">Home</Link>
@@ -81,12 +82,13 @@ export default function VesselDetail() {
         </div>
       </section>
       <section className="border-b border-technical-border bg-white">
-        <div className="container-site flex overflow-x-auto max-sm:w-full max-sm:pl-4">
+        {/* Phones and tablets wrap the specs into a grid so every value is on screen; lg keeps a single row. */}
+        <div className="container-site grid grid-cols-2 max-lg:-mb-px max-sm:w-full sm:grid-cols-3 sm:border-l sm:border-technical-border lg:flex lg:overflow-x-auto">
           {rail.map(([label, value], i) => (
             <div
               key={label}
               style={revealDelay(i * 60)}
-              className="reveal reveal-opacity min-w-[150px] flex-1 border-r border-technical-border px-[22px] py-[31px] first:border-l"
+              className="reveal reveal-opacity border-b border-r border-technical-border px-4 py-6 max-sm:even:border-r-0 sm:px-[22px] sm:py-[31px] lg:min-w-[150px] lg:flex-1 lg:border-b-0"
             >
               <span className="mb-2 block text-xs uppercase tracking-[.05em] text-slate-grey">{label}</span>
               <strong className="font-display text-sm font-medium leading-[1.4] text-steel-blue">{value}</strong>
@@ -202,7 +204,7 @@ export default function VesselDetail() {
           <h2 className="reveal mb-0 mt-[22px] font-display text-[clamp(42px,5vw,66px)] font-semibold leading-[normal] tracking-display">
             Interested in this platform?
           </h2>
-          <div className="reveal" style={revealDelay(100)}>
+          <div className="reveal mt-8 sm:mt-10" style={revealDelay(100)}>
             <Link className="btn btn-primary" to="/contact">
               Discuss This Vessel <Arrow />
             </Link>
