@@ -3,6 +3,7 @@ import Arrow from '@/components/common/Arrow'
 import Label from '@/components/common/Label'
 import SectionHeading from '@/components/common/SectionHeading'
 import Seo from '@/components/common/Seo'
+import SplitText from '@/components/common/SplitText'
 import MainLayout from '@/components/layout/MainLayout'
 import { getRelatedVessels, orderedVessels as vessels, pickSpecs } from '@/data/vessels'
 import { revealDelay, useReveal } from '@/hooks/useReveal'
@@ -60,9 +61,22 @@ export default function VesselDetail() {
               {vessel.category}
             </small>
           </div>
-          <h1 style={revealDelay(350)} className="hero-reveal mb-[18px] mt-2.5 font-display text-[52px] font-semibold leading-[.92] tracking-[-.055em] sm:text-[clamp(56px,min(7vw,11svh),96px)]">
-            {vessel.name}
-          </h1>
+          <SplitText
+            key={vessel.slug}
+            tag="h1"
+            text={vessel.name}
+            splitType="chars"
+            mask="chars"
+            from={{ yPercent: 110 }}
+            to={{ yPercent: 0 }}
+            duration={0.9}
+            delay={35}
+            startDelay={350}
+            ease="power4.out"
+            threshold={0}
+            rootMargin="0px"
+            className="mb-[18px] mt-2.5 font-display text-[52px] font-semibold leading-[.92] tracking-[-.055em] sm:text-[clamp(56px,min(7vw,11svh),96px)]"
+          />
           <p style={revealDelay(480)} className="hero-reveal max-w-[660px] text-[17px] leading-[1.65] text-ice-grey">{vessel.shortDescription}</p>
         </div>
       </section>

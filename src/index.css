@@ -104,6 +104,9 @@
   .hero-bg, .hero-reveal { animation: none; }
 }
 
+/* SplitText masks: GSAP clips each piece to its own box, so pad the bottom to keep descenders visible at tight leading. */
+.split-char-mask, .split-word-mask, .split-line-mask { padding-bottom: .14em; margin-bottom: -.14em; }
+
 /* Scroll reveal (useReveal). Hidden only when JS has initialised; keyframes leave no transform behind, so hovers are unaffected. */
 @keyframes reveal-rise { from { opacity: 0; transform: translateY(var(--rv, 20px)); } }
 html.js-reveal .reveal:not(.is-in) { opacity: 0; }
@@ -138,6 +141,44 @@ html.js-reveal .reveal:not(.is-in) { opacity: 0; }
   .wordmark-tilt { transform: none; }
   .wordmark-float { animation: none; will-change: auto; }
   .wordmark-waves { display: none; }
+}
+
+/*
+ * Build timeline route (TimelineBoat), lg and up: replaces the grid's top rule. When the route reveals, the boat sails
+ * from the first stage marker to the last (5 legs x 600ms after 300ms; keep in sync with SAIL_START/SAIL_STEP) and draws
+ * the solid rule behind it over a faint dashed route. The carrier spans the route, so its translate % is of the route
+ * width. The boat's waterline (56/64 of the hull drawing) sits on the rule; it is painted before the stage cells, so the
+ * markers stay in front of the hull as it passes. Stages use --d-lg here so each reveals as the boat reaches it.
+ */
+@keyframes timeline-sail { to { transform: translate3d(83.333%, 0, 0); } }
+@keyframes timeline-draw { to { transform: scaleX(.83333); } }
+@keyframes timeline-foam { 0%, 100% { opacity: 0; } 10%, 88% { opacity: 1; } }
+@keyframes timeline-bob {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-.8deg); }
+  50% { transform: translate3d(0, -1.5px, 0) rotate(.8deg); }
+}
+.timeline-stage { --d: var(--d-sm); }
+.timeline-route { display: none; }
+@media (width >= 64rem) {
+  .timeline-stage { --d: var(--d-lg); }
+  .timeline-route { --boat-w: 84px; display: block; position: absolute; left: 0; right: 0; top: -1px; height: 1px; pointer-events: none; background: repeating-linear-gradient(90deg, var(--color-steel-blue) 0 6px, transparent 6px 12px); }
+  .reveal.timeline-route.is-in { animation: reveal-fade-only 400ms ease-out both; }
+  .timeline-route-line { position: absolute; inset: 0; background: var(--color-steel-blue); transform: scaleX(0); transform-origin: 0 50%; }
+  .timeline-boat-carrier { position: absolute; inset: 0; }
+  .timeline-boat { position: absolute; left: calc(var(--boat-w) / -2); top: calc(.5px - var(--boat-w) * .2333); width: var(--boat-w); }
+  .timeline-boat-hull { position: relative; display: block; width: 100%; height: auto; transform-origin: 50% 87.5%; }
+  .timeline-boat-foam { position: absolute; right: 94%; top: calc(var(--boat-w) * .2333 - 1px); width: calc(var(--boat-w) * .8); height: 2px; border-radius: 1px; background: linear-gradient(90deg, transparent, rgb(221 228 230 / .7)); opacity: 0; }
+  .timeline-route.is-in .timeline-route-line { animation: timeline-draw 3000ms linear 300ms both; }
+  .timeline-route.is-in .timeline-boat-carrier { animation: timeline-sail 3000ms linear 300ms both; will-change: transform; }
+  .timeline-route.is-in .timeline-boat-foam { animation: timeline-foam 3000ms linear 300ms both; }
+  .timeline-route.is-in .timeline-boat-hull { animation: timeline-bob 2.4s ease-in-out infinite; }
+}
+@media (width >= 80rem) { .timeline-route { --boat-w: 96px; } }
+@media (prefers-reduced-motion: reduce) {
+  .timeline-route .timeline-route-line { transform: scaleX(.83333); }
+  .timeline-route .timeline-boat-carrier { transform: translate3d(83.333%, 0, 0); }
+  .timeline-route.is-in .timeline-boat-hull { animation: none; }
+  .timeline-boat-foam { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,5 +1,7 @@
+import type { CSSProperties } from 'react'
 import SectionHeading from '@/components/common/SectionHeading'
-import { revealDelay, useReveal } from '@/hooks/useReveal'
+import TimelineBoat, { SAIL_START, SAIL_STEP } from '@/components/sections/home/TimelineBoat'
+import { useReveal } from '@/hooks/useReveal'
 
 const processStages = [
   'Hull Moulding & Assembly',
@@ -22,12 +24,14 @@ export default function BuildTimeline() {
         <div className="reveal">
           <SectionHeading title={'Building to\nCommissioning.'} />
         </div>
-        <div className="mt-[100px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 lg:border-t lg:border-steel-blue">
+        <div className="relative mt-[100px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 lg:border-t lg:border-transparent">
+          <TimelineBoat />
           {processStages.map((stage, index) => (
             <div
               key={stage}
-              style={revealDelay(150 + index * 80)}
-              className="reveal relative min-h-40 border-t border-steel-blue pl-3.5 pr-5 pt-9 sm:min-h-[220px] sm:pl-0 lg:border-t-0"
+              /* Phones and tablets keep the short stagger; on lg each stage reveals as the boat reaches its marker. */
+              style={{ '--d-sm': `${150 + index * 80}ms`, '--d-lg': `${SAIL_START + index * SAIL_STEP - 200}ms` } as CSSProperties}
+              className="reveal timeline-stage relative min-h-40 border-t border-steel-blue pl-3.5 pr-5 pt-9 sm:min-h-[220px] sm:pl-0 lg:border-t-0"
             >
               <b className="block font-display text-[64px] font-medium leading-[normal] text-oxide-red">0{index + 1}</b>
               <i className="absolute -top-[5px] h-[9px] w-[9px] rotate-45 border border-oxide-red bg-oxide-red" />
