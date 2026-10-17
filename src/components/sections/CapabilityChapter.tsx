@@ -54,9 +54,6 @@ export default function CapabilityChapter({ chapter, index }: CapabilityChapterP
         </div>
         <div className="relative h-[380px] overflow-hidden sm:h-[560px] md:col-start-2 md:row-span-2 md:row-start-1 md:h-[620px] md:self-center">
           <img className="reveal reveal-scale h-full object-cover" src={chapter.image} alt={`${chapter.title} capability`} />
-          <span className="absolute bottom-4 right-4 bg-carbon-black px-2.5 py-2 text-xs tracking-[.04em] text-white">
-            ITUS / CAP / 0{index + 1}
-          </span>
         </div>
       </div>
     </section>

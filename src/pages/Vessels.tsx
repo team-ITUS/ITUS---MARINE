@@ -69,8 +69,8 @@ export default function Vessels() {
       />
       <div ref={ref}>
       <section ref={barRef} className="top-[76px] z-20 border-b border-technical-border bg-white lg:sticky">
-        <div className="hero-reveal container-site flex flex-col gap-4 py-5" style={revealDelay(450)}>
-          <label className="relative block w-full max-w-[420px]">
+        <div className="hero-reveal container-site flex flex-col gap-4 py-5 lg:flex-row lg:items-center" style={revealDelay(450)}>
+          <label className="relative block w-full max-w-[420px] lg:w-[200px] lg:shrink-0 xl:w-[220px]">
             <span className="sr-only">Search</span>
             <svg
               className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-grey"
@@ -91,12 +91,12 @@ export default function Vessels() {
               placeholder="Search vessels…"
             />
           </label>
-          <div className="flex flex-wrap gap-2 xl:flex-nowrap" aria-label="Filter vessels">
+          <div className="flex min-w-0 flex-wrap gap-2 lg:flex-1 lg:flex-nowrap lg:justify-between lg:gap-1.5" aria-label="Filter vessels">
             {vesselFilters.map((item) => (
               <button
                 type="button"
                 key={item}
-                className={`min-h-11 cursor-pointer whitespace-nowrap rounded-full border px-3.5 text-sm font-medium transition-colors duration-150 ${
+                className={`min-h-11 cursor-pointer whitespace-nowrap rounded-full border px-3.5 text-sm font-medium lg:min-h-9 lg:px-2.5 lg:text-xs xl:px-3 xl:text-[13px] transition-colors duration-150 ${
                   filter === item
                     ? 'border-carbon-black bg-carbon-black text-white'
                     : 'border-technical-border bg-transparent text-slate-grey hover:border-steel-blue hover:text-carbon-black'

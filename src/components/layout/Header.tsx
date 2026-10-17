@@ -56,16 +56,6 @@ export default function Header() {
             </NavLink>
           ))}
         </nav>
-        <div className="hidden items-center gap-6 justify-self-end lg:flex">
-          <a
-            className={`${underline} whitespace-nowrap text-ice-grey after:w-0`}
-            href={rescueUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Rescue Products <Arrow />
-          </a>
-        </div>
         <button
           className="flex h-11 w-11 cursor-pointer flex-col items-center justify-center gap-1.75 justify-self-end border border-dark-steel-border bg-transparent lg:hidden"
           type="button"

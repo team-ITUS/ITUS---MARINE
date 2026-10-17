@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import Arrow from '@/components/common/Arrow'
 import Brand from '@/components/common/Brand'
-import { rescueUrl } from '@/data/navigation'
+import { companyAddress, groupLinks } from '@/data/navigation'
 
 const footerLink = 'text-sm text-ice-grey transition-colors duration-200 hover:text-oxide-red'
 const stripClass =
@@ -20,9 +20,9 @@ function FooterGroup({ title, children }: { title: string; children: ReactNode }
 export default function Footer() {
   return (
     <footer className="border-t border-dark-steel-border bg-carbon-black pb-7 pt-[85px] text-white">
-      <div className="container-site grid grid-cols-1 gap-x-[5%] gap-y-10 pb-[70px] sm:grid-cols-[2fr_repeat(2,1fr)] lg:grid-cols-[2fr_repeat(4,1fr)]">
+      <div className="container-site grid grid-cols-1 gap-x-[5%] gap-y-10 pb-[70px] sm:grid-cols-[2fr_repeat(2,1fr)] lg:grid-cols-[1.6fr_repeat(3,.8fr)_1.5fr]">
         <div>
-          <Brand />
+          <Brand className="h-14 sm:h-16" />
           <p className="mt-[26px] max-w-[350px] text-[15px] leading-[1.65] text-ice-grey">
             Integrated marine engineering, vessel construction and systems
             integration for professional, commercial and specialised maritime
@@ -41,22 +41,31 @@ export default function Footer() {
           <Link className={footerLink} to="/about">About</Link>
           <Link className={footerLink} to="/contact">Contact</Link>
         </FooterGroup>
-        <FooterGroup title="Resources">
-          <a className={footerLink} href={rescueUrl} target="_blank" rel="noopener noreferrer">
-            ITUS Rescue <Arrow />
-          </a>
+        <FooterGroup title="Address">
+          <address className="text-sm not-italic leading-[1.7] text-ice-grey">
+            {companyAddress.map((line, index) => (
+              <span key={line} className={`block ${index === 0 ? 'mb-1 font-medium text-white' : ''}`}>
+                {line}
+              </span>
+            ))}
+          </address>
         </FooterGroup>
       </div>
-      <div className={`${stripClass} py-[22px] text-[13px]`}>
-        <span>Looking for professional rescue equipment?</span>
-        <a
-          className="text-ice-grey transition-colors duration-200 hover:text-oxide-red"
-          href={rescueUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Visit ITUS Rescue <Arrow />
-        </a>
+      <div className={`${stripClass} items-center gap-4 py-[22px] text-[13px]`}>
+        <span className="uppercase tracking-[.06em]">ITUS Group</span>
+        <div className="flex flex-wrap gap-2.5">
+          {groupLinks.map(([label, url]) => (
+            <a
+              key={url}
+              className="inline-flex min-h-10 items-center gap-1.5 rounded-full border border-dark-steel-border px-4 text-ice-grey transition-colors duration-200 hover:border-oxide-red hover:text-white"
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {label} <Arrow className="text-oxide-red" />
+            </a>
+          ))}
+        </div>
       </div>
       <div className={`${stripClass} pt-[22px] text-xs uppercase tracking-[.04em]`}>
         <span>© {new Date().getFullYear()} ITUS Marine</span>

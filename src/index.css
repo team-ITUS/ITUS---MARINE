@@ -116,12 +116,15 @@ html.js-reveal .reveal:not(.is-in) { opacity: 0; }
 .reveal-scale.is-in { animation-name: reveal-settle; animation-duration: 900ms; }
 @keyframes reveal-settle { from { opacity: 0; transform: scale(1.03); } }
 @keyframes reveal-fade-only { from { opacity: 0; } }
+/* About sector index: each row's divider draws in left-to-right with the row's reveal. */
+@keyframes sector-rule { from { transform: scaleX(0); } }
+.reveal.is-in .sector-rule { animation: sector-rule 900ms cubic-bezier(.22, 1, .36, 1) calc(var(--d, 0ms) + 150ms) backwards; }
 @media (width < 40rem) {
   .reveal { --rv: 12px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html.js-reveal .reveal:not(.is-in) { opacity: 1; }
-  .reveal.is-in { animation: none; }
+  .reveal.is-in, .reveal.is-in .sector-rule { animation: none; }
 }
 
 /* Home wordmark: bobbing float on a wrapper (separate from the .reveal entrance on the img), pointer parallax on an outer wrapper, and drifting waves below the hull. 4.5s loop; first and last keyframes match. */
@@ -180,6 +183,42 @@ html.js-reveal .reveal:not(.is-in) { opacity: 0; }
   .timeline-route .timeline-boat-carrier { transform: translate3d(83.333%, 0, 0); }
   .timeline-route.is-in .timeline-boat-hull { animation: none; }
   .timeline-boat-foam { display: none; }
+}
+
+/*
+ * Contact success scene (EnquirySent): night sea, three drifting wave layers, and the patrol craft sailing in from the
+ * left then bobbing between the mid and front waves. Hull waterline is 56/64 of the drawing; it sits on the front crest.
+ */
+@keyframes enquiry-sail { from { transform: translate3d(-75vw, 0, 0); } }
+@keyframes enquiry-bob {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-1.2deg); }
+  50% { transform: translate3d(0, -5px, 0) rotate(1.2deg); }
+}
+@keyframes enquiry-drift { to { transform: translate3d(-50%, 0, 0); } }
+@keyframes enquiry-wake { 0%, 100% { opacity: .35; transform: scaleX(.8); } 50% { opacity: .7; transform: scaleX(1); } }
+@keyframes enquiry-blink { 0%, 70%, 100% { opacity: 1; } 80% { opacity: .2; } }
+@keyframes enquiry-draw { from { stroke-dashoffset: 80; } }
+.enquiry-sea { position: relative; height: 260px; overflow: hidden; background: linear-gradient(180deg, var(--color-carbon-black) 0%, var(--color-steel-blue) 100%); }
+.enquiry-moon { position: absolute; top: 34px; right: 14%; width: 46px; height: 46px; border-radius: 50%; background: var(--color-ice-grey); box-shadow: 0 0 60px 18px rgb(221 228 230 / .18); opacity: .9; }
+.enquiry-wave { position: absolute; left: 0; bottom: 0; width: 200%; background-repeat: repeat-x; background-position: 0 0; background-size: 25% 100%; animation: enquiry-drift linear infinite; will-change: transform; }
+.enquiry-wave-back { height: 96px; opacity: .55; animation-duration: 22s; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 40' preserveAspectRatio='none'%3E%3Cpath d='M0 14 Q25 4 50 14 T100 14 V40 H0Z' fill='%238FA6B2' fill-opacity='.35'/%3E%3C/svg%3E"); }
+.enquiry-wave-mid { height: 74px; opacity: .8; animation-duration: 15s; animation-direction: reverse; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 40' preserveAspectRatio='none'%3E%3Cpath d='M0 16 Q25 6 50 16 T100 16 V40 H0Z' fill='%232F4652'/%3E%3C/svg%3E"); }
+.enquiry-wave-front { z-index: 2; height: 54px; animation-duration: 10s; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 40' preserveAspectRatio='none'%3E%3Cpath d='M0 18 Q25 8 50 18 T100 18 V40 H0Z' fill='%230E1418' fill-opacity='.92'/%3E%3Cpath d='M0 18 Q25 8 50 18 T100 18' fill='none' stroke='%23DDE4E6' stroke-opacity='.35' stroke-width='1.2' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E"); }
+.enquiry-boat { --boat-w: 190px; position: absolute; z-index: 1; left: calc(50% - var(--boat-w) / 2); bottom: calc(54px * .55 - var(--boat-w) * 64 / 240 * .125); width: var(--boat-w); animation: enquiry-sail 2400ms cubic-bezier(.22, 1, .36, 1) 200ms backwards; }
+.enquiry-boat-bob { position: relative; transform-origin: 50% 87.5%; animation: enquiry-bob 3.2s ease-in-out infinite; }
+.enquiry-wake { position: absolute; right: 92%; bottom: 14%; width: 120%; height: 3px; border-radius: 2px; transform-origin: 100% 50%; background: linear-gradient(90deg, transparent, rgb(221 228 230 / .75)); animation: enquiry-wake 2.4s ease-in-out infinite; }
+.enquiry-beacon { animation: enquiry-blink 1.6s steps(1, end) infinite; }
+.enquiry-check circle, .enquiry-check path { stroke-dasharray: 80; animation: enquiry-draw 900ms cubic-bezier(.22, 1, .36, 1) 700ms backwards; }
+/* Desktop contact column is one screen tall: the scene shrinks with the viewport height so the message still fits. */
+@media (width >= 48rem) {
+  .enquiry-sea { height: clamp(170px, 28vh, 260px); }
+}
+@media (width < 40rem) {
+  .enquiry-sea { height: 220px; }
+  .enquiry-boat { --boat-w: 150px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .enquiry-boat, .enquiry-boat-bob, .enquiry-wave, .enquiry-wake, .enquiry-beacon, .enquiry-check circle, .enquiry-check path { animation: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

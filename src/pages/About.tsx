@@ -6,6 +6,20 @@ import SimpleCta from '@/components/common/SimpleCta'
 import MainLayout from '@/components/layout/MainLayout'
 import { revealDelay, useReveal } from '@/hooks/useReveal'
 
+const sectors = [
+  'Patrolling & Interception',
+  'Coastal Security',
+  'Rescue & Emergency',
+  'Government',
+  'Commercial Marine',
+  'Ports & Harbours',
+  'Dive Operations',
+  'Watersports',
+  'Tourism',
+  'Resorts & Hospitality',
+  'Marinas',
+]
+
 export default function About() {
   const ref = useReveal<HTMLDivElement>()
   return (
@@ -34,7 +48,7 @@ export default function About() {
       <div ref={ref}>
       <section className="bg-polar-white py-[100px] md:py-40">
         <div className="container-site grid grid-cols-1 gap-[45px] md:grid-cols-[.35fr_1.65fr] md:gap-[8%]">
-          <b className="reveal text-xs font-semibold uppercase tracking-[.06em] text-oxide-red">01 / Who We Are</b>
+          <b className="reveal text-xs font-semibold md:flex md:h-[calc(clamp(32px,4.2vw,58px)_*_1.2)] md:items-center md:self-start uppercase tracking-[.06em] text-oxide-red">01 / Who We Are</b>
           <p style={revealDelay(100)} className="reveal m-0 font-display text-[34px] font-normal leading-[1.2] tracking-[-.04em] text-carbon-black sm:text-[clamp(32px,4.2vw,58px)]">
             We bring vessel manufacturing, marine engineering and operating
             understanding together to create platforms shaped by where they work
@@ -72,14 +86,27 @@ export default function About() {
       <section className="bg-carbon-black py-[140px] text-white">
         <div className="container-site">
           <div className="reveal">
-            <SectionHeading title="Different Waters. Different Work." />
+            <SectionHeading title="Different Waters.    
+             Different Work." />
           </div>
-          <p style={revealDelay(120)} className="reveal mt-[65px] max-w-[1150px] font-display text-[clamp(20px,2.6vw,36px)] font-medium uppercase leading-[1.6] text-ice-grey">
-            Government / Commercial Marine / Rescue & Emergency / Ports &
-            Harbours / Industrial & Utility / Tourism / Resorts & Hospitality /
-            Water Parks / Watersports / Marinas / Dive Operations / Coastal
-            Security
-          </p>
+          <ul className="mt-[65px] grid grid-cols-1 gap-x-10 md:grid-cols-2 xl:grid-cols-3">
+            {sectors.map((sector, index) => (
+              <li
+                key={sector}
+                style={revealDelay(120 + index * 70)}
+                className="reveal group relative flex items-baseline gap-4 py-5 sm:py-6"
+              >
+                <span className="text-xs font-semibold tabular-nums tracking-[.06em] text-oxide-red">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span className="whitespace-nowrap font-display text-[clamp(18px,1.6vw,24px)] font-medium uppercase leading-tight text-ice-grey transition-[color,transform] duration-300 group-hover:translate-x-2 group-hover:text-white">
+                  {sector}
+                </span>
+                <span aria-hidden="true" className="sector-rule absolute inset-x-0 bottom-0 h-px origin-left bg-white/15" />
+                <span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-oxide-red transition-transform duration-500 group-hover:scale-x-100" />
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
       <SimpleCta title="Start a Conversation." />
