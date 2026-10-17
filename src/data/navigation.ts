@@ -27,7 +27,7 @@ export const vesselFilters = [
   'All',
   'Rescue & Emergency',
   'Government',
-  'Patrol & Security',
+  'Defence & Security',
   'Commercial & Utility',
   'Tourism & Leisure',
   'Ports & Harbours',

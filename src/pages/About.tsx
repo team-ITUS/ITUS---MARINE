@@ -7,12 +7,14 @@ import MainLayout from '@/components/layout/MainLayout'
 import { revealDelay, useReveal } from '@/hooks/useReveal'
 
 const sectors = [
+  'Armed & Naval Forces',
   'Patrolling & Interception',
-  'Commercial Marine',
   'Government',
+   'Coastal Security',
+  'Commercial Marine',
   'Rescue & Emergency',
   'Ports & Harbours',
-  'Coastal Security',
+ 
 ]
 
 export default function About() {

@@ -2,13 +2,15 @@ export type VesselCategory =
   | 'Rescue & SAR'
   | 'Defence & Security'
   | 'Patrol'
-  | 'Fire & Emergency'
+  | 'Patrolling & SAR'
+  | 'Rescue & Emergency'
   | 'Utility & Workboats'
   | 'Special Craft';
 
 export type VesselApplication =
   | 'Rescue & Emergency'
   | 'Government'
+  | 'Defence & Security'
   | 'Patrol & Security'
   | 'Commercial & Utility'
   | 'Tourism & Leisure'
