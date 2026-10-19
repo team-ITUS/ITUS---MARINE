@@ -28,7 +28,7 @@ export default function Capabilities() {
         video={{
           src: asset('/videos/Capabilties/capabilities-hero.mp4'),
           poster: asset('/videos/Capabilties/capabilities-hero-poster.jpg'),
-          label: 'Aerial view of a boat on the shoreline',
+          label: 'Work boats moored in a harbour at sunset',
           position: '48% center',
         }}
       />

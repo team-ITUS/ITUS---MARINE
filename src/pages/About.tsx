@@ -38,7 +38,7 @@ export default function About() {
         video={{
           src: asset('/videos/About/about-hero.mp4'),
           poster: asset('/videos/About/about-hero-poster.jpg'),
-          label: 'Boat resting on a beach at dusk',
+          label: 'Aerial view of a waterfront port at dusk',
           position: '35% center',
         }}
       />

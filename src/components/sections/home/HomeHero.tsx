@@ -50,11 +50,12 @@ export default function HomeHero({ vessel }: { vessel: Vessel }) {
       </div>
 
       <div className="absolute inset-x-0 bottom-[35px] z-[3] lg:bottom-[45px]">
-        <div className="container-site flex flex-wrap justify-between gap-y-1.5 text-[11px] font-semibold uppercase tracking-[.03em] text-carbon-black sm:text-[13px] lg:justify-start lg:text-steel-blue">
+        {/* Fixed 2×2 grid below lg so every phone width gets the same layout; one divided row on desktop. */}
+        <div className="container-site grid grid-cols-2 gap-x-4 gap-y-2.5 text-[11px] font-semibold uppercase leading-tight tracking-[.03em] text-carbon-black sm:text-[13px] lg:flex lg:gap-0 lg:text-steel-blue">
           {labels.map((label, i) => (
             <span
               key={label}
-              className="hero-reveal border-l border-steel-blue px-5 first:border-l-0 first:pl-0"
+              className="hero-reveal border-l border-steel-blue pl-3 lg:px-5 lg:first:border-l-0 lg:first:pl-0"
               style={delay(1000 + i * 90)}
             >
               {label}

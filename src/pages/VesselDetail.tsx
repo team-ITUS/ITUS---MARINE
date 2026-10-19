@@ -113,9 +113,7 @@ export default function VesselDetail() {
           src={vessel.galleryImages[0] ?? vessel.heroImage}
           alt={`Profile of ${vessel.name}`}
         />
-        <span className="absolute bottom-[18px] right-[18px] bg-carbon-black px-3 py-[9px] text-xs uppercase tracking-[.04em] text-white">
-          ITUS / {vessel.name} / General Arrangement
-        </span>
+        
       </section>
       {(vessel.missionApplications.length > 0 || vessel.keyFeatures.length > 0) && (
         <section className="bg-polar-white py-[100px] md:py-40">

@@ -2,7 +2,7 @@ import { useId } from 'react'
 
 /**
  * Desktop route line for the build timeline (lg and up). A `.reveal` element, so useReveal on the section
- * starts it: the boat sails from the first stage marker to the last, drawing the rule behind it, and each
+ * starts it: the boat sails from the first stage marker to the end of the route, drawing the rule behind it, and each
  * stage reveals as the boat reaches it (delays in BuildTimeline match SAIL_START and SAIL_STEP).
  * All animation is CSS in index.css; reduced motion shows the finished state.
  */
@@ -43,6 +43,6 @@ export default function TimelineBoat() {
   )
 }
 
-/** Sail timing shared with the stage reveal delays: start delay, and time between markers (5 legs). */
+/** Sail timing shared with the stage reveal delays: start delay, and time between markers (6 legs to the route end). */
 export const SAIL_START = 300
 export const SAIL_STEP = 600
