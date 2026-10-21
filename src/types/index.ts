@@ -40,7 +40,7 @@ export interface Vessel {
   hullMaterial?: string;
   missionApplications: string[];
   keyFeatures: string[];
-  technicalSpecs: { label: string; value: string }[];
+  technicalSpecs: { label: string; value: string | string[] }[];
   optionalEquipment?: string[];
   sourceDocument?: string;
   sourcePage?: number;

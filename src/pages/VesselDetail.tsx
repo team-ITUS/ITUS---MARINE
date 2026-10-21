@@ -22,6 +22,7 @@ function SectionNumber({ children, className = '' }: { children: string; classNa
 const lineItem =
   "relative border-b border-technical-border py-[18px] pl-6 text-base leading-[1.4] text-slate-grey before:absolute before:left-0 before:font-semibold before:text-oxide-red before:content-['—']"
 const specRow = 'grid grid-cols-1 gap-[7px] border-b border-technical-border py-[17px] sm:grid-cols-[1fr_1.2fr] sm:gap-[30px]'
+const specRowMulti = 'grid grid-cols-1 gap-[7px] border-b border-technical-border py-[17px] sm:grid-cols-[.6fr_2fr] sm:gap-[30px]'
 
 export default function VesselDetail() {
   const { slug } = useParams()
@@ -162,9 +163,17 @@ export default function VesselDetail() {
             </div>
             <div style={revealDelay(120)} className="reveal border-t-2 border-steel-blue">
               {vessel.technicalSpecs.map((spec) => (
-                <div key={spec.label} className={specRow}>
+                <div key={spec.label} className={Array.isArray(spec.value) ? specRowMulti : specRow}>
                   <span className="text-sm text-slate-grey">{spec.label}</span>
-                  <strong className="text-sm font-medium leading-normal text-carbon-black">{spec.value}</strong>
+                  {Array.isArray(spec.value) ? (
+                    <div className="grid grid-cols-3 gap-4">
+                      {spec.value.map((v, i) => (
+                        <strong key={i} className="text-sm font-medium leading-normal text-carbon-black">{v}</strong>
+                      ))}
+                    </div>
+                  ) : (
+                    <strong className="text-sm font-medium leading-normal text-carbon-black">{spec.value}</strong>
+                  )}
                 </div>
               ))}
             </div>
