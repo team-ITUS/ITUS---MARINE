@@ -81,7 +81,7 @@ export const vessels: Vessel[] = [
       { label: 'Breadth Overall', value: ['2.80 m', '3.22 m', '3.27 m'] },
       { label: 'Draft Hull', value: ['0.60 m', '0.60 m', '0.60 m'] },
       { label: 'Speed - Full Load', value: ['25+ knots', '40 knots', '40 knots'] },
-      { label: 'Complements', value: ['10 nos. (8+2 incl. crew)', '12 nos (10 + 2 incl. crew)', '14 nos (12+2 incl. crew)'] },
+      { label: 'Complements', value: ['10 nos. (8+2 incl. crew)', '12 nos (10+2 incl. crew)', '14 nos (12+2 incl. crew)'] },
       { label: 'Main Engine', value: ['4 stroke outboard 150 HP', 'Twin 4-stroke outboard 250 HP', 'Twin 4-stroke outboard 250 HP'] },
       { label: 'Land Speed', value: ['7-9 km/h', '6-10 km/h', '6-10 km/h'] },
     ],
