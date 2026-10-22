@@ -28,8 +28,8 @@ export default function Capabilities() {
         video={{
           src: asset('/videos/Capabilties/capabilities-hero.mp4'),
           poster: asset('/videos/Capabilties/capabilities-hero-poster.jpg'),
-          label: 'Work boats moored in a harbour at sunset',
-          position: '48% center',
+          label: 'Bridging boat and pontoon ferry carrying a tank across a river',
+          position: 'center',
         }}
       />
       {/* Phones and tablets show every chapter in a static grid; lg pins them as one sticky row. */}
@@ -42,7 +42,7 @@ export default function Capabilities() {
             <a
               key={chapter.id}
               href={`#${chapter.id}`}
-              className="border-b border-r border-technical-border px-4 py-5 text-[13px] uppercase leading-[1.4] tracking-[.03em] text-steel-blue hover:bg-ice-grey hover:text-carbon-black max-sm:even:border-r-0 max-sm:last:odd:col-span-2 max-sm:last:odd:border-r-0lg:min-w-[170px] lg:flex-auto lg:shrink-0 lg:whitespace-nowrap lg:border-b-0 lg:py-6 lg:leading-normal"
+              className="border-b border-r border-technical-border px-4 py-5 text-[13px] uppercase leading-[1.4] tracking-[.03em] text-steel-blue hover:bg-ice-grey hover:text-carbon-black max-sm:even:border-r-0 max-sm:last:odd:col-span-2 max-sm:last:odd:border-r-0 lg:min-w-[170px] lg:flex-auto lg:shrink-0 lg:whitespace-nowrap lg:border-b-0 lg:py-6 lg:leading-normal"
             >
               <span className="mb-[7px] block font-semibold text-oxide-red">0{index + 1}</span>
               {chapter.title.replace('.', '')}

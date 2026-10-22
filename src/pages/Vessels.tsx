@@ -63,8 +63,8 @@ export default function Vessels() {
         video={{
           src: asset('/videos/VesselHero/vessel-hero.mp4'),
           poster: asset('/videos/VesselHero/vessel-hero-poster.jpg'),
-          label: 'Vessels at sea on the horizon, viewed from the shore',
-          position: '60% center',
+          label: 'Airboat speeding through wetland channels',
+          position: 'center',
         }}
       />
       <div ref={ref}>
