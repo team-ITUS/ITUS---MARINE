@@ -17,7 +17,9 @@ npm run preview    # serve the production build
 
 | What | Where |
 | --- | --- |
-| Pages (one file per route) | `src/pages/` — Home, Vessels, VesselDetail, Capabilities, About, Contact, NotFound |
+| Pages (one file per route) | `src/pages/` — Home, Vessels, VesselDetail, Capabilities, About, Gallery, CaseStudies, CaseStudyDetail, Contact, NotFound |
+| Gallery media list (photos and videos, in display order) | `src/data/gallery.ts` |
+| Case studies (projects in display order, verified data only) | `src/data/case-studies.ts` |
 | Routes | `src/routes/AppRoutes.tsx` |
 | Header / Footer / page shell | `src/components/layout/` |
 | Reusable pieces (headings, form field, SEO, CTA) | `src/components/common/` |
@@ -36,6 +38,15 @@ Optimised WebP files live in `public/images/`, one folder per area: `home/`,
 `about/`, `capabilities/`, `contact/` and `vessels/<vessel>/<vessel>-<n>.webp`
 (`-1` is the main photo, the others are gallery images). `src/data/vessels.ts`
 and `src/data/capabilities.ts` point to them.
+
+Gallery tile thumbnails (AVIF + WebP at several widths) live in `public/images/gallery/`
+and are generated from `src/data/gallery.ts`: after adding or changing gallery
+media, run `npm run gallery:thumbs` (Node 23.6+) and commit the new files and
+`src/data/gallery-thumbs.json`.
+
+Case study covers work the same way: they are generated into `public/images/case-studies/`
+from `src/data/case-studies.ts` by `npm run case-studies:images`, which also writes
+`src/data/case-study-images.json`.
 
 `public/NewAssets/` holds the original PNG exports. It is git-ignored and is
 removed from `dist/` automatically on every build, so it is never deployed.

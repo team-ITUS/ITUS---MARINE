@@ -1,5 +1,6 @@
 import { useEffect, useRef, type ReactNode } from 'react'
 import { revealDelay } from '@/hooks/useReveal'
+import Label from './Label'
 
 interface EditorialHeroVideo {
   src: string
@@ -11,12 +12,14 @@ interface EditorialHeroVideo {
 
 interface EditorialHeroProps {
   title: ReactNode
-  intro: string
+  /** Small label above the title. */
+  label?: string
+  intro?: string
   compact?: boolean
   video?: EditorialHeroVideo
 }
 
-export default function EditorialHero({ title, intro, compact = false, video }: EditorialHeroProps) {
+export default function EditorialHero({ title, label, intro, compact = false, video }: EditorialHeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
 
   // Reduced-motion users keep the poster frame instead of the looping background video.
@@ -62,15 +65,22 @@ export default function EditorialHero({ title, intro, compact = false, video }: 
         <div className="draft-grid" aria-hidden="true" />
       )}
       <div className="container-site relative">
+        {label && (
+          <div className="hero-reveal mb-7" style={revealDelay(50)}>
+            <Label tone="light">{label}</Label>
+          </div>
+        )}
         <h1
           style={revealDelay(150)}
-          className={`hero-reveal mb-[26px] max-w-[1050px] font-display font-semibold leading-[.9] tracking-[-.055em] max-sm:text-[51px] ${
+          className={`hero-reveal max-w-[1050px] font-display font-semibold leading-[.9] tracking-[-.055em] max-sm:text-[51px] ${
             compact ? 'text-[clamp(52px,6vw,78px)]' : 'text-[clamp(62px,7vw,96px)]'
-          }`}
+          } ${intro ? 'mb-[26px]' : 'mb-0'}`}
         >
           {title}
         </h1>
-        <p className="hero-reveal max-w-[680px] text-[17px] leading-[1.65] text-ice-grey" style={revealDelay(300)}>{intro}</p>
+        {intro && (
+          <p className="hero-reveal max-w-[680px] text-[17px] leading-[1.65] text-ice-grey" style={revealDelay(300)}>{intro}</p>
+        )}
       </div>
     </section>
   )

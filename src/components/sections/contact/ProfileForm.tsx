@@ -9,7 +9,7 @@ type Errors = Partial<Record<FieldName, string>>
 /** Form fields in DOM order (the first invalid one gets focus). `website` is a honeypot and is not validated. */
 const fields = ['fullName', 'email', 'phone', 'location', 'currentRole', 'experience', 'expertise', 'linkedin', 'cv', 'message'] as const
 type FieldName = (typeof fields)[number]
-const required: FieldName[] = ['fullName', 'email', 'phone', 'location', 'currentRole', 'experience', 'expertise', 'cv']
+const required: FieldName[] = ['fullName', 'email', 'phone', 'location', 'experience', 'expertise', 'cv']
 
 const inputClass = `${fieldClass} aria-[invalid=true]:border-oxide-red`
 

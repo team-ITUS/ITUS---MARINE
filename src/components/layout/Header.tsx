@@ -6,7 +6,7 @@ import { primaryNav, rescueUrl } from '@/data/navigation'
 
 /** Nav link with an oxide-red underline that grows on hover and for the active route. */
 const underline =
-  "relative text-sm uppercase tracking-ui after:absolute after:left-0 after:top-[27px] after:h-px after:bg-oxide-red after:transition-[width] after:duration-[250ms] after:content-[''] hover:text-white hover:after:w-full"
+  "relative whitespace-nowrap text-sm uppercase tracking-ui after:absolute after:left-0 after:top-[27px] after:h-px after:bg-oxide-red after:transition-[width] after:duration-[250ms] after:content-[''] hover:text-white hover:after:w-full"
 
 export default function Header() {
   const [open, setOpen] = useState(false)
@@ -38,7 +38,7 @@ export default function Header() {
         scrolled ? 'bg-carbon-black/98' : 'bg-linear-to-b from-carbon-black/60 to-transparent'
       }`}
     >
-      <div className="container-site grid h-[70px] grid-cols-[1fr_auto] items-center gap-8 sm:h-[76px] lg:grid-cols-[auto_1fr_auto] lg:gap-[clamp(20px,2vw,38px)]">
+      <div className="container-site grid h-[70px] grid-cols-[1fr_auto] items-center gap-8 sm:h-[76px] lg:grid-cols-[auto_1fr] lg:gap-[clamp(20px,2vw,38px)]">
         <Brand />
         <nav
           className="hidden h-full items-center gap-[clamp(20px,2vw,38px)] justify-self-end lg:flex"

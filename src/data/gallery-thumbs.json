@@ -1,0 +1,284 @@
+{
+  "amphibious-boat-beach-exit": {
+    "width": 1723,
+    "height": 913,
+    "widths": [
+      640,
+      1280,
+      1723
+    ]
+  },
+  "shipyard-hull-construction": {
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      640,
+      1280,
+      1536
+    ]
+  },
+  "cabin-vessel-fabrication": {
+    "width": 1448,
+    "height": 1086,
+    "widths": [
+      640,
+      1448
+    ]
+  },
+  "ambulance-boat-bridge": {
+    "width": 1451,
+    "height": 1084,
+    "widths": [
+      640,
+      1451
+    ]
+  },
+  "airboat-river": {
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      640,
+      1280,
+      1672
+    ]
+  },
+  "crew-boat-spray": {
+    "width": 1678,
+    "height": 937,
+    "widths": [
+      640,
+      1280,
+      1678
+    ]
+  },
+  "amphibious-cabin-boat-shore": {
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      640,
+      1280,
+      1536
+    ]
+  },
+  "support-vessels-launch": {
+    "width": 1452,
+    "height": 1083,
+    "widths": [
+      640,
+      1452
+    ]
+  },
+  "video-bridging-boat": {
+    "width": 1920,
+    "height": 1080,
+    "widths": [
+      640,
+      1280,
+      1920
+    ]
+  },
+  "fast-interceptor-open-sea": {
+    "width": 1679,
+    "height": 937,
+    "widths": [
+      640,
+      1280,
+      1679
+    ]
+  },
+  "rib-trailer-launch": {
+    "width": 1448,
+    "height": 1086,
+    "widths": [
+      640,
+      1448
+    ]
+  },
+  "bridge-erection-boat-aerial": {
+    "width": 1678,
+    "height": 937,
+    "widths": [
+      640,
+      1280,
+      1678
+    ]
+  },
+  "swamp-boat-tropical": {
+    "width": 1451,
+    "height": 1084,
+    "widths": [
+      640,
+      1451
+    ]
+  },
+  "amphibious-boat-beach-team": {
+    "width": 1448,
+    "height": 1086,
+    "widths": [
+      640,
+      1448
+    ]
+  },
+  "ambulance-boat-underway": {
+    "width": 1679,
+    "height": 937,
+    "widths": [
+      640,
+      1280,
+      1679
+    ]
+  },
+  "video-amphibious-boat": {
+    "width": 1920,
+    "height": 1080,
+    "widths": [
+      640,
+      1280,
+      1920
+    ]
+  },
+  "helm-console": {
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      640,
+      1280,
+      1672
+    ]
+  },
+  "wheelhouse-interior": {
+    "width": 1087,
+    "height": 745,
+    "widths": [
+      640,
+      1087
+    ]
+  },
+  "video-airboat": {
+    "width": 1920,
+    "height": 1080,
+    "widths": [
+      640,
+      1280,
+      1920
+    ]
+  },
+  "patrol-boat-quay": {
+    "width": 1678,
+    "height": 937,
+    "widths": [
+      640,
+      1280,
+      1678
+    ]
+  },
+  "inflatable-boat-workshop": {
+    "width": 1448,
+    "height": 1086,
+    "widths": [
+      640,
+      1448
+    ]
+  },
+  "rib-rescue-crew": {
+    "width": 1840,
+    "height": 855,
+    "widths": [
+      640,
+      1280,
+      1840
+    ]
+  },
+  "bridge-erection-boat-river": {
+    "width": 1451,
+    "height": 1084,
+    "widths": [
+      640,
+      1451
+    ]
+  },
+  "catamaran-river": {
+    "width": 1406,
+    "height": 1119,
+    "widths": [
+      640,
+      1406
+    ]
+  },
+  "swamp-boat-sunset": {
+    "width": 1678,
+    "height": 937,
+    "widths": [
+      640,
+      1280,
+      1678
+    ]
+  },
+  "amphibious-boat-dunes": {
+    "width": 1678,
+    "height": 937,
+    "widths": [
+      640,
+      1280,
+      1678
+    ]
+  },
+  "floating-bridge-aerial": {
+    "width": 1182,
+    "height": 805,
+    "widths": [
+      640,
+      1182
+    ]
+  },
+  "patrol-boat-shallows": {
+    "width": 1185,
+    "height": 1049,
+    "widths": [
+      640,
+      1185
+    ]
+  },
+  "video-crew-boat": {
+    "width": 1678,
+    "height": 937,
+    "widths": [
+      640,
+      1280,
+      1678
+    ]
+  },
+  "fibre-boat-passengers": {
+    "width": 1678,
+    "height": 937,
+    "widths": [
+      640,
+      1280,
+      1678
+    ]
+  },
+  "armoured-cabin-boat-marina": {
+    "width": 1087,
+    "height": 741,
+    "widths": [
+      640,
+      1087
+    ]
+  },
+  "airboat-calm-water": {
+    "width": 1064,
+    "height": 636,
+    "widths": [
+      640,
+      1064
+    ]
+  },
+  "rib-on-trailer": {
+    "width": 959,
+    "height": 655,
+    "widths": [
+      640,
+      959
+    ]
+  }
+}

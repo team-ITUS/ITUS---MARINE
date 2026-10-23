@@ -19,6 +19,8 @@ export const primaryNav: [label: string, path: string][] = [
   ['Vessels', '/vessels'],
   ['Capabilities', '/capabilities'],
   ['About', '/about'],
+  ['Case Studies', '/case-studies'],
+  ['Gallery', '/gallery'],
   ['Contact', '/contact'],
 ]
 

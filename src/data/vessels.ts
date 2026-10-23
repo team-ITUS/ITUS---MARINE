@@ -588,20 +588,20 @@ export const vesselCategories: VesselCategory[] = [
 ];
 
 const applicationTagsBySlug: Record<string, VesselApplication[]> = {
-  'amphibious-boat': ['Rescue & Emergency', 'Government', 'Patrol & Security', 'Special Craft'],
-  '8m-rigid-inflatable-boat': ['Rescue & Emergency', 'Government', 'Patrol & Security'],
-  'airboat': ['Rescue & Emergency', 'Government', 'Special Craft'],
-  'bridge-erection-boat': ['Government', 'Defence & Security', 'Patrol & Security', 'Special Craft'],
-  '6-7m-fibre-boat': ['Rescue & Emergency', 'Government'],
-  '5-4m-rib': ['Rescue & Emergency', 'Government', 'Patrol & Security'],
-  'swamp-boat-obm': ['Rescue & Emergency', 'Government', 'Defence & Security', 'Patrol & Security', 'Special Craft'],
+  'amphibious-boat': ['Rescue & Emergency', 'Government', 'Defence & Security', 'Patrol & Security', 'Special Craft', 'Tourism & Leisure', 'Ports & Harbours'],
+  'bridge-erection-boat': ['Government', 'Defence & Security', 'Special Craft', 'Commercial & Utility'],
+  'airboat': ['Rescue & Emergency', 'Government', 'Defence & Security', 'Patrol & Security', 'Special Craft', 'Tourism & Leisure'],
+  '8m-rigid-inflatable-boat': ['Rescue & Emergency', 'Government', 'Patrol & Security', 'Tourism & Leisure', 'Ports & Harbours'],
+  '6-7m-fibre-boat': ['Rescue & Emergency', 'Government', 'Commercial & Utility', 'Tourism & Leisure', 'Ports & Harbours'],
+  '5-4m-rib': ['Rescue & Emergency', 'Government', 'Patrol & Security', 'Commercial & Utility', 'Tourism & Leisure', 'Ports & Harbours'],
+  'swamp-boat-obm': ['Government', 'Defence & Security', 'Patrol & Security', 'Special Craft'],
   'swamp-boat-stern-drive': ['Government', 'Defence & Security', 'Patrol & Security', 'Special Craft'],
   'water-ambulance': ['Rescue & Emergency', 'Government'],
   'fast-interceptor-craft': ['Government', 'Defence & Security', 'Patrol & Security'],
   'catamaran': ['Commercial & Utility', 'Tourism & Leisure'],
   'patrol-boat': ['Government', 'Patrol & Security', 'Ports & Harbours'],
-  'immediate-support-vessel': ['Rescue & Emergency', 'Government', 'Commercial & Utility'],
-  '23-8m-crew-boat': ['Commercial & Utility', 'Ports & Harbours'],
+  'immediate-support-vessel': ['Rescue & Emergency', 'Government', 'Patrol & Security'],
+  '23-8m-crew-boat': ['Commercial & Utility', 'Tourism & Leisure', 'Ports & Harbours'],
 };
 
 export const orderedVessels = vessels.map((vessel) => ({

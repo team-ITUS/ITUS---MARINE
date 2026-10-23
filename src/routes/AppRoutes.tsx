@@ -2,7 +2,10 @@ import { Navigate, Route, Routes, useParams } from 'react-router-dom'
 import { useScrollToTop } from '@/hooks/useScrollToTop'
 import About from '@/pages/About'
 import Capabilities from '@/pages/Capabilities'
+import CaseStudies from '@/pages/CaseStudies'
+import CaseStudyDetail from '@/pages/CaseStudyDetail'
 import Contact from '@/pages/Contact'
+import Gallery from '@/pages/Gallery'
 import Home from '@/pages/Home'
 import NotFound from '@/pages/NotFound'
 import VesselDetail from '@/pages/VesselDetail'
@@ -22,6 +25,9 @@ export default function AppRoutes() {
       <Route path="/vessels/:slug" element={<VesselDetail />} />
       <Route path="/capabilities" element={<Capabilities />} />
       <Route path="/about" element={<About />} />
+      <Route path="/gallery" element={<Gallery />} />
+      <Route path="/case-studies" element={<CaseStudies />} />
+      <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
       <Route path="/contact" element={<Contact />} />
 
       {/* Legacy URLs from the earlier site structure */}

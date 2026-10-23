@@ -38,6 +38,7 @@ Options -MultiViews -Indexes
 # for a year. index.html must always be re-checked so new releases show up.
 <IfModule mod_mime.c>
   AddType image/webp .webp
+  AddType image/avif .avif
   AddType application/javascript .js
   AddType image/svg+xml .svg
 </IfModule>
@@ -50,6 +51,7 @@ Options -MultiViews -Indexes
   ExpiresByType application/javascript "access plus 1 year"
   ExpiresByType text/javascript "access plus 1 year"
   ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/avif "access plus 1 month"
   ExpiresByType image/svg+xml "access plus 1 month"
   ExpiresByType image/jpeg "access plus 1 month"
   ExpiresByType image/png "access plus 1 month"

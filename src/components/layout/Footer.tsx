@@ -39,6 +39,8 @@ export default function Footer() {
         </FooterGroup>
         <FooterGroup title="Company">
           <Link className={footerLink} to="/about">About</Link>
+          <Link className={footerLink} to="/case-studies">Case Studies</Link>
+          <Link className={footerLink} to="/gallery">Gallery</Link>
           <Link className={footerLink} to="/contact">Contact</Link>
         </FooterGroup>
         <FooterGroup title="Address">
