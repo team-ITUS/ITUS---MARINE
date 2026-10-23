@@ -221,6 +221,38 @@ html.js-reveal .reveal:not(.is-in) { opacity: 0; }
   .enquiry-boat, .enquiry-boat-bob, .enquiry-wave, .enquiry-wake, .enquiry-beacon, .enquiry-check circle, .enquiry-check path { animation: none; }
 }
 
+/*
+ * Contact "Join Us" intro (JoinUs). Night-sea gradient, slow water-current lines behind the copy, and a sea lane along
+ * the bottom with the patrol craft floating at anchor on the right, bobbing on the water. --wl is the waterline's
+ * offset in the lane; the hull's waterline is 87.5% down a drawing .2667 x its width tall, so the keel sits .0333 x
+ * the width below it.
+ */
+@keyframes join-drift { to { transform: translate3d(-50%, 0, 0); } }
+.join-section { background: linear-gradient(180deg, var(--color-carbon-black) 0%, color-mix(in srgb, var(--color-steel-blue) 40%, var(--color-carbon-black)) 55%, color-mix(in srgb, var(--color-steel-blue) 55%, var(--color-carbon-black)) 72%, var(--color-carbon-black) 100%); }
+.join-currents { position: absolute; inset: 0; overflow: hidden; pointer-events: none; -webkit-mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent); mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent); }
+.join-currents span { position: absolute; left: 0; width: 200%; height: 40px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20 Q25 8 50 20 T100 20' fill='none' stroke='%238FA6B2' stroke-width='1.2' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") repeat-x 0 0 / 12.5% 100%; animation: join-drift 34s linear infinite; will-change: transform; }
+.join-currents span:nth-child(1) { top: 16%; opacity: .14; }
+.join-currents span:nth-child(2) { top: 33%; opacity: .1; animation-duration: 46s; animation-direction: reverse; }
+.join-currents span:nth-child(3) { top: 50%; opacity: .32; animation-duration: 40s; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 40' preserveAspectRatio='none'%3E%3Cpath d='M0 20 Q25 10 50 20 T100 20' fill='none' stroke='%23A94D42' stroke-width='1.2' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E"); }
+.join-currents span:nth-child(4) { top: 66%; opacity: .16; animation-duration: 54s; animation-direction: reverse; }
+.join-lane { --boat-w: 120px; --wl: calc(var(--boat-w) * .2333 + 36px); --inset: calc(5% + var(--boat-w) / 2); position: relative; height: calc(var(--wl) + 84px); margin-top: 48px; pointer-events: none; }
+.join-sea { position: absolute; left: 0; right: 0; top: var(--wl); bottom: 0; background: linear-gradient(180deg, rgb(143 166 178 / .1), transparent 30%), linear-gradient(180deg, color-mix(in srgb, var(--color-steel-blue) 55%, var(--color-carbon-black)), var(--color-carbon-black)); }
+.join-anchor { position: absolute; right: var(--inset); top: var(--wl); width: 0; height: 0; }
+.join-boat { position: absolute; left: calc(var(--boat-w) / -2); bottom: calc(var(--boat-w) * -.0333); width: var(--boat-w); }
+.join-boat-bob { position: relative; transform-origin: 50% 87.5%; animation: enquiry-bob 3.4s ease-in-out infinite; }
+@media (width < 40rem) {
+  .join-currents span:nth-child(2), .join-currents span:nth-child(4) { display: none; }
+}
+@media (width >= 40rem) { .join-lane { --boat-w: 170px; margin-top: 72px; } }
+/* Desktop: the lane shrinks on short screens so the whole intro fits one screen (see JoinUs). */
+@media (width >= 48rem) {
+  .join-lane { --boat-w: clamp(140px, 22svh, 170px); --wl: calc(var(--boat-w) * .2333 + clamp(16px, 3svh, 36px)); height: calc(var(--wl) + clamp(32px, 6svh, 84px)); margin-top: clamp(16px, 3svh, 72px); }
+}
+@media (width >= 64rem) { .join-lane { --boat-w: clamp(140px, 22svh, 210px); } }
+@media (prefers-reduced-motion: reduce) {
+  .join-currents span, .join-boat-bob { animation: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }

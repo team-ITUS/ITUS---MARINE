@@ -1,5 +1,4 @@
 export const rescueUrl = 'https://itusrescue.com/'
-
 /** ITUS Group sites, shown as buttons in the footer. */
 export const groupLinks: [label: string, url: string][] = [
   ['ITUS Group', 'https://itus.net.in/'],

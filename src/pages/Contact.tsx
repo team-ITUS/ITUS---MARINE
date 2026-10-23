@@ -5,6 +5,7 @@ import FormField, { fieldClass } from '@/components/common/FormField'
 import Seo from '@/components/common/Seo'
 import MainLayout from '@/components/layout/MainLayout'
 import EnquirySent from '@/components/sections/contact/EnquirySent'
+import JoinUs from '@/components/sections/contact/JoinUs'
 import { revealDelay, useReveal } from '@/hooks/useReveal'
 
 const office = 'border-t border-technical-border pt-5'
@@ -80,6 +81,7 @@ export default function Contact() {
           </div>
         </div>
       </section>
+      <JoinUs />
     </MainLayout>
   )
 }

@@ -53,7 +53,7 @@ export default function CapabilityChapter({ chapter, index }: CapabilityChapterP
           </ul>
         </div>
         <div className="relative h-[380px] overflow-hidden sm:h-[560px] md:col-start-2 md:row-span-2 md:row-start-1 md:h-[clamp(380px,calc(100svh_-_200px),620px)] md:self-center lg:h-[clamp(360px,calc(84svh_-_164px),620px)]">
-          <img className="reveal reveal-scale h-full object-cover" src={chapter.image} alt={`${chapter.title} capability`} />
+          <img className="reveal reveal-scale h-full" src={chapter.image} alt={`${chapter.title} capability`} />
         </div>
       </div>
     </section>
