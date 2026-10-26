@@ -45,10 +45,8 @@ export default function CaseStudies() {
         title="Proven in Real Operations."
         intro="Selected vessel programmes, engineering projects and operational deployments across specialised maritime requirements."
         compact
-        // TODO: replace the poster with a frame from this video, and the label with a description of it.
         video={{
           src: asset('/videos/CaseStudy/case-study-hero.mp4'),
-          poster: asset('/images/case-studies/amphibious-rescue-platform-1280.webp'),
           label: 'ITUS vessel in operation at sea',
           position: 'center',
         }}

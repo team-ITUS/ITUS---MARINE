@@ -9,24 +9,26 @@ import type { CaseStudy, CaseStudyData } from '@/types'
  * build the cover images in public/images/case-studies/ (AVIF + WebP at several widths) and
  * src/data/case-study-images.json. Run it after adding or changing a cover.
  */
-export const caseStudies: CaseStudy[] = [
-  // TODO before launch: placeholder copy from the Phase 3 brief. Replace with a verified project or remove.
+export const caseStudies: CaseStudy[] = [  
   {
-    slug: 'amphibious-rescue-platform',
-    title: 'Amphibious Rescue Platform',
-    subtitle: 'A specialised amphibious vessel programme developed for rescue and emergency-response environments.',
-    coverImage: '/images/vessels/amphibious-boat/amphibious-boat-3.webp',
-    coverAlt: 'Amphibious rescue boat with its wheels down, driving out of the sea onto a beach with crew aboard',
+    slug: 'maha-kumbh-mela-2025',
+    title: 'ITUS Amphibious Boats at Maha Kumbh Mela 2025',
+    subtitle:
+      'Supporting security, rescue preparedness and emergency response across the Prayagraj riverfront during Maha Kumbh Mela 2025.',
+    coverImage: '/images/case-studies/image.jpg',
+    coverAlt: 'ITUS amphibious boat operating on the river during Maha Kumbh Mela 2025',
     data: {
-      client: 'Government Agency',
+      client: 'Uttar Pradesh Anti-Terrorism Squad (UP ATS)',
       vesselType: 'Amphibious Boat',
-      application: 'Rescue & Emergency',
-      location: 'India',
-      year: '2026',
-      quantity: '02',
+      application: 'Security, Rescue & Emergency Response',
+      location: 'Prayagraj, Uttar Pradesh, India',
+      year: '2025',
+      quantity: '4 IRS HDPE Rescue Boats',
+      constructionMaterial: 'HDPE',
+      keyConfiguration: 'Ocean Blue',
     },
     overview:
-      'ITUS delivered two amphibious boats for rescue and emergency-response operations, built to launch from the shore, cross shallow water and reach people where conventional vessels cannot.',
+      'ITUS marine platforms supported security, rescue and emergency-response operations across the Prayagraj riverfront during Maha Kumbh Mela 2025.',
   },
 ]
 

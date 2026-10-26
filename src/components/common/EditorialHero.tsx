@@ -4,7 +4,8 @@ import Label from './Label'
 
 interface EditorialHeroVideo {
   src: string
-  poster: string
+  /** Optional still shown while the video loads or when motion is reduced. */
+  poster?: string
   label: string
   /** CSS object-position for the video; keep the subject in frame on narrow screens. */
   position?: string
@@ -22,7 +23,7 @@ interface EditorialHeroProps {
 export default function EditorialHero({ title, label, intro, compact = false, video }: EditorialHeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
 
-  // Reduced-motion users keep the poster frame instead of the looping background video.
+  // Reduced-motion users keep the poster frame, when one is supplied, instead of the looping background video.
   useEffect(() => {
     const el = videoRef.current
     if (!el) return
