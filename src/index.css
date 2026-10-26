@@ -148,41 +148,84 @@ html.js-reveal .reveal:not(.is-in) { opacity: 0; }
 }
 
 /*
- * Build timeline route (TimelineBoat), lg and up: replaces the grid's top rule. When the route reveals, the boat sails
- * from the first stage marker to the end of the route (6 legs x 600ms after 300ms; keep in sync with SAIL_START/SAIL_STEP) and draws
- * the solid rule behind it over a faint dashed route. The carrier spans the route, so its translate % is of the route
- * width. The boat's waterline (56/64 of the hull drawing) sits on the rule; it is painted before the stage cells, so the
- * markers stay in front of the hull as it passes. Stages use --d-lg here so each reveals as the boat reaches it.
+ * Build timeline route (TimelineBoat), lg and up: replaces the grid's top rule. When the route reveals, the amphibious
+ * craft runs from the first stage marker to the end of the route (6 legs x 1000ms after 300ms; keep in sync with
+ * SAIL_START/SAIL_STEP) and draws the route behind it over a faint dashed line. The first quarter is land (sand-coloured
+ * rule over a grainy sand bed), the rest is water (drifting wave line). On land the craft rides on its wheels, lifted by the
+ * wheel height, with spinning wheels and a light suspension rumble; at the shoreline it pitches nose-down into the water
+ * with a splash, settles to its waterline, retracts its wheels, then picks up its wake and bobs.
+ * Every one-shot animation shares the 6000ms / 300ms timing, so keyframe % equals route progress (shoreline = 25%).
+ * The carrier spans the route, so its translate % is of the route width. The boat's waterline (56/64 of the hull
+ * drawing) sits on the rule; it is painted before the stage cells, so the markers stay in front of the hull as it
+ * passes. Stages use --d-lg here so each reveals as the boat reaches it.
  */
 @keyframes timeline-sail { to { transform: translate3d(100%, 0, 0); } }
-@keyframes timeline-draw { to { transform: scaleX(1); } }
-@keyframes timeline-foam { 0%, 100% { opacity: 0; } 10%, 88% { opacity: 1; } }
+@keyframes timeline-draw { to { clip-path: inset(0 0 0 0); } }
+@keyframes timeline-foam { 0%, 31% { opacity: 0; } 38%, 88% { opacity: 1; } 100% { opacity: 0; } }
 @keyframes timeline-bob {
   0%, 100% { transform: translate3d(0, 0, 0) rotate(-.8deg); }
   50% { transform: translate3d(0, -1.5px, 0) rotate(.8deg); }
 }
+@keyframes timeline-rumble { 50% { transform: translate3d(0, -.7px, 0); } }
+@keyframes timeline-launch {
+  0%, 22% { transform: translate3d(0, var(--lift), 0) rotate(0); }
+  26% { transform: translate3d(0, calc(var(--lift) * .35), 0) rotate(4deg); }
+  29% { transform: translate3d(0, 1.5px, 0) rotate(-1.5deg); }
+  33%, 100% { transform: translate3d(0, 0, 0) rotate(0); }
+}
+@keyframes timeline-retract {
+  0%, 30% { transform: translate3d(0, 0, 0); opacity: 1; }
+  40% { transform: translate3d(0, -18%, 0); opacity: 1; }
+  44%, 100% { transform: translate3d(0, -18%, 0); opacity: 0; }
+}
+@keyframes timeline-spin { to { transform: rotate(360deg); } }
+@keyframes timeline-ripple { from { opacity: .9; transform: scale(.2); } to { opacity: 0; transform: scale(1.8); } }
+@keyframes timeline-spray { from { opacity: 1; transform: translate3d(0, 0, 0) scale(.4); } to { opacity: 0; transform: translate3d(0, -10px, 0) scale(1.3); } }
+@keyframes timeline-wave { to { background-position-x: -24px; } }
 .timeline-stage { --d: var(--d-sm); }
 .timeline-route { display: none; }
 @media (width >= 64rem) {
   .timeline-stage { --d: var(--d-lg); }
-  .timeline-route { --boat-w: 84px; display: block; position: absolute; left: 0; right: 0; top: -1px; height: 1px; pointer-events: none; background: repeating-linear-gradient(90deg, var(--color-steel-blue) 0 6px, transparent 6px 12px); }
+  .timeline-route { --boat-w: 84px; --shore: 25%; --sand: #C8B08A; display: block; position: absolute; left: 0; right: 0; top: -1px; height: 1px; pointer-events: none; background: repeating-linear-gradient(90deg, var(--color-steel-blue) 0 6px, transparent 6px 12px); }
   .reveal.timeline-route.is-in { animation: reveal-fade-only 400ms ease-out both; }
-  .timeline-route-line { position: absolute; inset: 0; background: var(--color-steel-blue); transform: scaleX(0); transform-origin: 0 50%; }
+  /* Drawn route: 12px tall band with the rule at y=4px, revealed left to right behind the boat. */
+  .timeline-route-line { position: absolute; left: 0; right: 0; top: -4px; height: 12px; clip-path: inset(0 100% 0 0); }
+  .timeline-land { position: absolute; left: 0; top: 4px; width: var(--shore); height: 1px; background: var(--sand); }
+  /* Sand bed: three offset grain layers over a warm tint, fading downward and into the shoreline. */
+  .timeline-ground { position: absolute; left: 0; top: 5px; width: var(--shore); height: 7px; opacity: .75; background: radial-gradient(circle, var(--sand) 0 .8px, transparent 1.1px) 0 0 / 7px 4px, radial-gradient(circle, var(--sand) 0 .6px, transparent .9px) 3px 2px / 5px 5px, radial-gradient(circle, rgb(200 176 138 / .7) 0 .5px, transparent .8px) 1px 4px / 9px 3px, linear-gradient(to bottom, rgb(200 176 138 / .35), transparent); -webkit-mask-image: linear-gradient(to bottom, #000, transparent), linear-gradient(to left, transparent, #000 24px); -webkit-mask-composite: source-in; mask-image: linear-gradient(to bottom, #000, transparent), linear-gradient(to left, transparent, #000 24px); mask-composite: intersect; }
+  .timeline-water { position: absolute; left: var(--shore); right: 0; top: 1.5px; height: 6px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 6'%3E%3Cpath d='M0 3 Q6 .5 12 3 T24 3' fill='none' stroke='%234f7391' stroke-width='1.2'/%3E%3C/svg%3E") repeat-x 0 0 / 24px 6px; }
+  .timeline-splash { position: absolute; left: 26.5%; top: 0; width: 0; height: 0; }
+  .timeline-splash span { position: absolute; left: -16px; top: -3px; width: 32px; height: 7px; border: 1px solid var(--color-ice-grey); border-radius: 50%; opacity: 0; }
+  .timeline-splash .timeline-spray { left: -1px; top: -4px; width: 2px; height: 2px; border: 0; background: var(--color-ice-grey); box-shadow: -7px 2px 0 var(--color-ice-grey), 6px 1px 0 var(--color-ice-grey), -3px -3px 0 var(--color-ice-grey), 3px -4px 0 var(--color-ice-grey), 10px 3px 0 rgb(221 228 230 / .6), -11px 3px 0 rgb(221 228 230 / .6); }
   .timeline-boat-carrier { position: absolute; inset: 0; }
-  .timeline-boat { position: absolute; left: calc(var(--boat-w) / -2); top: calc(.5px - var(--boat-w) * .2333); width: var(--boat-w); }
+  .timeline-boat { --lift: calc(var(--boat-w) * -.0833); position: absolute; left: calc(var(--boat-w) / -2); top: calc(.5px - var(--boat-w) * .2333); width: var(--boat-w); }
+  .timeline-boat-lift { position: relative; transform: translate3d(0, var(--lift), 0); transform-origin: 50% 87.5%; }
+  .timeline-boat-wheels { position: absolute; left: 0; top: 0; display: block; width: 100%; height: auto; }
+  .timeline-wheel-spokes { transform-box: fill-box; transform-origin: 50% 50%; }
   .timeline-boat-hull { position: relative; display: block; width: 100%; height: auto; transform-origin: 50% 87.5%; }
   .timeline-boat-foam { position: absolute; right: 94%; top: calc(var(--boat-w) * .2333 - 1px); width: calc(var(--boat-w) * .8); height: 2px; border-radius: 1px; background: linear-gradient(90deg, transparent, rgb(221 228 230 / .7)); opacity: 0; }
-  .timeline-route.is-in .timeline-route-line { animation: timeline-draw 3600ms linear 300ms both; }
-  .timeline-route.is-in .timeline-boat-carrier { animation: timeline-sail 3600ms linear 300ms both; will-change: transform; }
-  .timeline-route.is-in .timeline-boat-foam { animation: timeline-foam 3600ms linear 300ms both; }
-  .timeline-route.is-in .timeline-boat-hull { animation: timeline-bob 2.4s ease-in-out infinite; }
+  .timeline-route.is-in .timeline-route-line { animation: timeline-draw 6000ms linear 300ms both; }
+  .timeline-route.is-in .timeline-water { animation: timeline-wave 2.6s linear infinite; }
+  .timeline-route.is-in .timeline-boat-carrier { animation: timeline-sail 6000ms linear 300ms both; will-change: transform; }
+  .timeline-route.is-in .timeline-boat-foam { animation: timeline-foam 6000ms linear 300ms both; }
+  .timeline-route.is-in .timeline-boat-lift { animation: timeline-launch 6000ms linear 300ms both; }
+  .timeline-route.is-in .timeline-boat-wheels { animation: timeline-retract 6000ms ease-in-out 300ms both; }
+  /* Absolute delays below are 300ms + route % x 6000ms: wheels spin and hull rumbles until the shore (~22-26%),
+     splash at 26.5%, bob once afloat (~33%). */
+  .timeline-route.is-in .timeline-wheel-spokes { animation: timeline-spin 400ms linear 300ms 4; }
+  .timeline-route.is-in .timeline-boat-hull { animation: timeline-rumble 220ms ease-in-out 300ms 6, timeline-bob 3s ease-in-out 2300ms infinite; }
+  .timeline-route.is-in .timeline-splash span { animation: timeline-ripple 1200ms ease-out 1890ms both; }
+  .timeline-route.is-in .timeline-splash span:nth-child(2) { animation-delay: 2150ms; }
+  .timeline-route.is-in .timeline-splash .timeline-spray { animation: timeline-spray 800ms ease-out 1890ms both; }
 }
 @media (width >= 80rem) { .timeline-route { --boat-w: 96px; } }
 @media (prefers-reduced-motion: reduce) {
-  .timeline-route .timeline-route-line { transform: scaleX(1); }
+  .timeline-route .timeline-route-line { clip-path: none; }
   .timeline-route .timeline-boat-carrier { transform: translate3d(100%, 0, 0); }
-  .timeline-route.is-in .timeline-boat-hull { animation: none; }
-  .timeline-boat-foam { display: none; }
+  .timeline-route .timeline-boat-lift { transform: none; }
+  .timeline-route.is-in .timeline-boat-hull, .timeline-route.is-in .timeline-water { animation: none; }
+  .timeline-route.is-in .timeline-route-line, .timeline-route.is-in .timeline-boat-lift, .timeline-route.is-in .timeline-wheel-spokes { animation: none; }
+  .timeline-boat-foam, .timeline-boat-wheels, .timeline-splash { display: none; }
 }
 
 /*

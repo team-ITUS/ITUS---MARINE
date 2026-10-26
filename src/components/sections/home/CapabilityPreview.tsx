@@ -36,9 +36,6 @@ export default function CapabilityPreview() {
           src={asset('/images/home/from-building-to-commissioning/Red Amphibious Rescue Boat at Marina Beach.webp')}
           alt="ITUS amphibious vessel platform"
         />
-        <span className="absolute bottom-7 left-7 bg-carbon-black/80 px-3 py-2 text-xs uppercase tracking-[.06em] text-white">
-          Integrated Marine Capability
-        </span>
       </div>
       <div className="px-6 py-20 sm:px-[5vw] sm:py-[90px] lg:px-[7vw] lg:py-[110px]">
         {chapters.map(([title, detail], index) => (
