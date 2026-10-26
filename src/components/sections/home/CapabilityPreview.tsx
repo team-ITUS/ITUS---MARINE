@@ -33,7 +33,7 @@ export default function CapabilityPreview() {
       <div className="reveal reveal-opacity relative min-h-[480px] min-w-0 sm:min-h-[650px] md:min-h-0">
         <img
           className="h-full object-cover"
-          src={asset('/images/home/from-building-to-commissioning/amphibious-boat-2.webp')}
+          src={asset('/images/home/from-building-to-commissioning/Red Amphibious Rescue Boat at Marina Beach.webp')}
           alt="ITUS amphibious vessel platform"
         />
         <span className="absolute bottom-7 left-7 bg-carbon-black/80 px-3 py-2 text-xs uppercase tracking-[.06em] text-white">
