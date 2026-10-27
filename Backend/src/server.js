@@ -2,6 +2,7 @@ import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
 import connectDB from './config/db.js'
+import { verifyMailer } from './config/mailer.js'
 import contactRoutes from './routes/contact.routes.js'
 import applicationRoutes from './routes/application.routes.js'
 
@@ -16,7 +17,10 @@ app.use('/api/contact', contactRoutes)
 app.use('/api/applications', applicationRoutes)
 
 connectDB()
-  .then(() => app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`)))
+  .then(() => {
+    app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`))
+    verifyMailer()
+  })
   .catch((err) => {
     console.error('MongoDB connection failed:', err.message)
     process.exit(1)

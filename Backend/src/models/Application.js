@@ -42,6 +42,16 @@ const applicationSchema = new mongoose.Schema(
       size: Number,
       mimeType: String,
     },
+    // Whether the notification email reached the careers inbox; failed ones can be found and re-sent.
+    // Not named "email": that is the applicant's address above.
+    mailStatus: {
+      sent: { type: Boolean, default: false },
+      sentAt: Date,
+      accepted: [String], // recipients the SMTP server took
+      rejected: [String], // recipients it refused
+      response: String, // the SMTP server's reply, e.g. "250 OK id=..."
+      error: String,
+    },
   },
   { timestamps: true },
 )
