@@ -16,11 +16,30 @@ export default function Contact() {
   const ref = useReveal<HTMLElement>()
 
   const [sent, setSent] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState('')
 
-  // No backend is connected: a valid form just shows the success state.
-  const submit = (event: FormEvent<HTMLFormElement>) => {
+  // Browser validation first, then the enquiry is saved by the backend (POST /api/contact).
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    if (event.currentTarget.reportValidity()) setSent(true)
+    const form = event.currentTarget
+    if (!form.reportValidity()) return
+
+    setSending(true)
+    setError('')
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+      })
+      if (!response.ok) throw new Error('Request failed')
+      setSent(true)
+    } catch {
+      setError('Could not send your enquiry. Please try again.')
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -73,8 +92,9 @@ export default function Contact() {
               <FormField label="Message">
                 <textarea className={`${fieldClass} resize-none`} name="message" required rows={3} />
               </FormField>
-              <button className="btn btn-primary mt-2 w-fit md:self-center" type="submit">
-                Send Enquiry
+              {error && <p className="text-sm text-oxide-red" role="alert">{error}</p>}
+              <button className="btn btn-primary mt-2 w-fit md:self-center" type="submit" disabled={sending}>
+                {sending ? 'Sending…' : 'Send Enquiry'}
               </button>
             </form>
           )}

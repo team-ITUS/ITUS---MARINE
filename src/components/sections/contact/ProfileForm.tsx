@@ -97,13 +97,16 @@ function ProfileSent() {
 
 /**
  * Talent submission form. Validates on submit (then live on each field already in error), focuses the first invalid
- * field. Like the enquiry form, no backend is connected yet: a valid form just shows the thank-you state.
+ * field. A valid form is sent with the CV to the backend (POST /api/applications); field errors it returns are shown
+ * the same way as the client-side ones.
  */
 export default function ProfileForm() {
   const [sent, setSent] = useState(false)
   const [errors, setErrors] = useState<Errors>({})
   const [file, setFile] = useState<File | null>(null)
   const [announcement, setAnnouncement] = useState('')
+  const [sending, setSending] = useState(false)
+  const [formError, setFormError] = useState('')
 
   if (sent) return <ProfileSent />
 
@@ -127,7 +130,7 @@ export default function ProfileForm() {
 
   const chooseFile = (event: ChangeEvent<HTMLInputElement>) => setFile(event.target.files?.[0] ?? null)
 
-  const submit = (event: FormEvent<HTMLFormElement>) => {
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const form = event.currentTarget
     const data = new FormData(form)
@@ -145,7 +148,24 @@ export default function ProfileForm() {
       ;(form.elements.namedItem(firstInvalid) as HTMLElement | null)?.focus()
       return
     }
-    setSent(true)
+
+    setSending(true)
+    setFormError('')
+    try {
+      // FormData includes the CV file; don't set Content-Type, the browser adds it.
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/applications`, { method: 'POST', body: data })
+      const result = await response.json()
+      if (!response.ok) {
+        if (result.errors) setErrors(result.errors)
+        setFormError(result.message ?? 'Please check the highlighted fields.')
+        return
+      }
+      setSent(true)
+    } catch {
+      setFormError('Could not submit your profile. Please try again.')
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -225,7 +245,7 @@ export default function ProfileForm() {
         <textarea className={`${inputClass} resize-none`} {...control('message')} rows={4} maxLength={2000} />
       </Field>
 
-      {/* Honeypot: hidden from people and assistive tech; bots that fill it are dropped by the server. */}
+      {/* Honeypot: hidden from people and assistive tech. The backend currently ignores this field. */}
       <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
         <label>
           Website
@@ -234,8 +254,9 @@ export default function ProfileForm() {
       </div>
 
       <div className="sm:col-span-2">
-        <button className="btn btn-primary w-full sm:w-fit" type="submit">
-          Submit Profile
+        {formError && <p className="mb-4 text-sm text-oxide-red" role="alert">{formError}</p>}
+        <button className="btn btn-primary w-full sm:w-fit" type="submit" disabled={sending}>
+          {sending ? 'Submitting…' : 'Submit Profile'}
         </button>
         <p className="sr-only" aria-live="polite">{announcement}</p>
       </div>
