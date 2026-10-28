@@ -29,7 +29,7 @@ export default function RangePreview() {
               <span className="row-span-2 text-[13px] font-semibold text-oxide-red">
                 {String(vessel.brochureOrder).padStart(2, '0')}
               </span>
-              <img className="row-span-2 h-[68px] object-cover sm:h-24" src={vessel.heroImage} alt={vessel.name} />
+              <img className="row-span-2 h-[68px] object-cover sm:h-24" src={vessel.heroImage} alt={vessel.name} loading="lazy" decoding="async" />
               <strong className="self-end font-display text-lg font-semibold leading-[normal] text-carbon-black sm:text-[21px]">
                 {vessel.name}
               </strong>

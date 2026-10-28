@@ -2,13 +2,14 @@ import { defineConfig, loadEnv, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'node:path'
-import { existsSync, rmSync } from 'node:fs'
+import { existsSync, readdirSync, rmSync } from 'node:fs'
 
 /**
  * Production-build housekeeping:
- *  - public/NewAssets and public/3D Boat Images hold original PNG exports
- *    (git-ignored). Vite copies all of /public into /dist, so remove those
- *    folders to keep the build small.
+ *  - public/NewAssets and public/3D Boat Images hold original PNG exports, and
+ *    public/*.glb is the raw CAD export (all git-ignored; the site loads the
+ *    optimised public/models/boat model). Vite copies all of /public into
+ *    /dist, so remove them to keep the build small.
  *  - public/.htaccess (SPA routing, caching, security headers) must reach /dist
  *    on every build; fail loudly if it is missing instead of shipping a site
  *    that 404s on refresh.
@@ -22,6 +23,7 @@ function productionHousekeeping(): Plugin {
       for (const folder of ['NewAssets', '3D Boat Images']) {
         rmSync(path.join(dist, folder), { recursive: true, force: true })
       }
+      for (const file of readdirSync(dist).filter((name) => name.endsWith('.glb'))) rmSync(path.join(dist, file))
       if (!existsSync(path.join(dist, '.htaccess'))) {
         throw new Error('dist/.htaccess is missing. Keep public/.htaccess in the project.')
       }

@@ -15,6 +15,7 @@ export default function HomeHero({ vessel }: { vessel: Vessel }) {
         <img
           className="hero-bg h-full object-cover object-[68%_center] lg:object-center"
           src={asset('/images/home/hero/hero.webp')}
+          fetchPriority="high"
           alt={`${vessel.name} underway on a beach`}
         />
         <div className="hero-wash absolute inset-0" />

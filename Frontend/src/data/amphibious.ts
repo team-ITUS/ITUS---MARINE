@@ -1,111 +1,160 @@
-import type { BoatCameraPreset, BoatFeature, BoatHullFinish, GalleryItem } from '@/types'
+import type { BoatCameraPreset, BoatFeature, BoatHinge, BoatLayer, BoatViewMode, GalleryItem } from '@/types'
 
 /*
- * Content for the interactive amphibious boat on the Capabilities page.
- * The 3D model is drawn in code (BoatModel.tsx) from the design renders; positions are in metres with x towards the
- * bow, y up from the deck line and z to starboard. Highlights are kept descriptive: add confirmed figures
- * (length, beam, power, speeds) here once they are signed off.
+ * Content for the 3D boat configurator on the Capabilities page.
+ * The model is the SOLIDWORKS assembly of the 10.2 m amphibious luxury boat, converted for the web by
+ * `npm run boat:model`. Positions are in metres with x towards the bow, y up from the ground under the wheels and
+ * z to starboard. Features find their parts by the start of the CAD component names; a feature whose parts are not
+ * in the model is left out of the viewer. Highlights are kept descriptive: add confirmed figures (speeds,
+ * capacities) once they are signed off.
  */
 
+export const boatModel = {
+  url: '/models/boat/amphibious-10-2m.glb',
+  /** Water surface when the wheels are raised. */
+  waterlineY: 0.8,
+  /** Height the Interior mode cuts the wheelhouse at. */
+  interiorCutY: 2.6,
+}
+
 export const boatCameraPresets: BoatCameraPreset[] = [
-  { id: 'three-quarter', label: '3/4 View', position: [9, 4.2, 10.5], target: [0, -0.3, 0] },
-  { id: 'profile', label: 'Profile', position: [0, 0.4, 15.5], target: [0, -0.3, 0] },
-  { id: 'bow', label: 'Bow', position: [14, 1.6, 0], target: [0, -0.2, 0] },
-  { id: 'stern', label: 'Stern', position: [-13.5, 2.6, 0], target: [0, -0.2, 0] },
-  { id: 'top', label: 'Top', position: [0, 17, 0.01], target: [0, 0, 0] },
-  { id: 'cockpit', label: 'Cockpit', position: [-6.8, 4.4, 4.2], target: [0.6, 0.6, 0] },
+  { id: 'three-quarter', label: '3/4', position: [8.2, 4.6, 9], target: [0, 1.3, 0] },
+  { id: 'front', label: 'Front', position: [12, 2.4, 0], target: [0, 1.3, 0] },
+  { id: 'side', label: 'Side', position: [0, 2, 12.5], target: [0, 1.3, 0] },
+  { id: 'rear', label: 'Rear', position: [-12, 3.2, 0], target: [0, 1.3, 0] },
+  { id: 'top', label: 'Top', position: [0, 15, 0.01], target: [0, 1, 0] },
 ]
+
+/** Camera for each view mode; changing mode flies the camera here. */
+export const boatModeViews: Record<BoatViewMode, BoatCameraPreset> = {
+  exterior: boatCameraPresets[0],
+  interior: { id: 'interior', label: 'Interior', position: [-5.8, 8.2, 5.6], target: [0.8, 1.4, 0] },
+  cutaway: { id: 'cutaway', label: 'Cutaway', position: [1.5, 3.2, 12.5], target: [0.6, 1.3, 0] },
+}
 
 export const boatFeatures: BoatFeature[] = [
   {
     id: 'hull',
-    name: 'Deep-V Hull',
+    name: 'Hull & Collar',
     description:
-      'Hard-chine deep-V planing hull that carries the boat offshore and runs it cleanly up beaches, ramps and riverbanks.',
-    highlights: ['Hard-chine deep-V form', 'FRP or aluminium construction', 'Finish selectable in the viewer'],
-    anchor: [0.6, -0.55, 1.05],
-    view: { position: [3, -1.2, 9.5], target: [0.5, -0.5, 0] },
+      'Deep-V planing hull with a full-length fendering collar and a transom that carries the outboards and stern wheel legs.',
+    highlights: ['Deep-V planing hull', 'Full-length fendering collar', 'Transom for twin outboards'],
+    parts: ['10.2m amphi luxury-cabine', 'new Transom'],
+    viewFrom: [0.6, 0.15, 1],
+    shell: true,
   },
   {
-    id: 'collar',
-    name: 'Fendering Collar',
-    description:
-      'A full-perimeter collar adds reserve buoyancy and stability, and protects the hull when coming alongside or landing.',
-    highlights: ['Full-perimeter protection', 'Reserve buoyancy', 'Stable boarding platform'],
-    anchor: [-1.6, 0.2, 1.45],
-    view: { position: [-1, 2.2, 7.5], target: [-1.2, 0, 0.6] },
+    id: 'wheelhouse',
+    name: 'Wheelhouse',
+    description: 'Enclosed wheelhouse with all-round tinted glazing and twin windscreen wipers over the helm.',
+    highlights: ['All-round tinted glazing', 'Twin windscreen wipers', 'Roof-mounted lights and antenna'],
+    parts: ['stream cab', 'wiper'],
+    viewFrom: [1, 0.5, 0.8],
+    shell: true,
   },
   {
-    id: 'rear-legs',
-    name: 'Rear Wheel Legs',
+    id: 'helm',
+    name: 'Helm Console',
     description:
-      'Two transom-mounted legs with off-road tyres carry the stern on land and fold up clear of the water when afloat.',
-    highlights: ['Transom-mounted pair', 'Fold clear for water operation', 'Off-road tyres'],
-    anchor: [-4.15, -0.1, 1.6],
-    view: { position: [-9, 0.4, 6.5], target: [-4, -0.8, 0.4] },
+      'Helm with steering wheel, throttle, display screen, gauges and speedometer, switch panels and a VHF marine radio.',
+    highlights: ['Steering wheel and throttle', 'Display, gauges and switch panels', 'VHF marine radio'],
+    parts: ['Steering Wheel', 'THROTAL', 'screen', 'button assembly', 'Gauge', 'dial speedo', 'vhf radio', 'IC-M330G'],
+    viewFrom: [-1, 0.9, 0.35],
+    mode: 'interior',
+  },
+  {
+    id: 'seating',
+    name: 'Seating & Lounge',
+    description: 'Helm and navigator seats, bench seating behind them and an aft lounge with a telescopic table.',
+    highlights: ['Helm and navigator seats', 'Bench seating', 'Aft lounge with telescopic table'],
+    parts: ['3d seat', 'back seat', 'luxury seat', 'MirrorCouch', 'teliscopic table', 'IC engine box'],
+    viewFrom: [-0.5, 1, 0.6],
+    mode: 'interior',
+  },
+  {
+    id: 'head',
+    name: 'Marine Head',
+    description: 'Below the foredeck, a marine toilet compartment reached from the wheelhouse. The cutaway shows it.',
+    highlights: ['Marine toilet', 'Below-deck compartment', 'Access from the wheelhouse'],
+    parts: ['toilet', 'bathroom toilet roll'],
+    viewFrom: [0.2, 0.25, 1],
+    mode: 'cutaway',
+  },
+  {
+    id: 'deck',
+    name: 'Side Decks',
+    description: 'Walkways along both sides of the wheelhouse, laid with timber-finish pads, run from the cockpit to the bow.',
+    highlights: ['Walkways on both sides', 'Timber-finish pads', 'Cockpit-to-bow access'],
+    parts: ['waking pad'],
+    viewFrom: [0.3, 1, 1],
+  },
+  {
+    id: 'engines',
+    name: 'Twin Outboards',
+    description:
+      'Twin Yamaha 250 hp outboards on the transom give redundancy for patrol and rescue work. Steer them with the slider.',
+    highlights: ['Twin 250 hp outboards', 'Engine redundancy', 'Steering shown in the viewer'],
+    parts: ['yamaha 250 hp'],
+    viewFrom: [-1, 0.45, 0.7],
+  },
+  {
+    id: 'stern-legs',
+    name: 'Stern Wheel Legs',
+    description:
+      'A wheel leg on each side of the transom carries the stern on land and swings up clear of the water when afloat.',
+    highlights: ['Port and starboard legs', 'Swing up for water operation', 'Off-road tyres'],
+    parts: ['S45 STERN'],
+    viewFrom: [-0.8, 0.2, 1],
   },
   {
     id: 'bow-leg',
     name: 'Bow Wheel Leg',
-    description:
-      'A single forward leg with twin wheels completes the three-point undercarriage, steering the boat across the beach.',
-    highlights: ['Twin-wheel nose leg', 'Folds forward when afloat', 'Three-point stance on land'],
-    anchor: [4.2, -0.2, 0.4],
-    view: { position: [8.5, 0.2, 5.5], target: [3.6, -0.8, 0] },
+    description: 'A single bow leg completes the three-point undercarriage and steers the boat across the beach.',
+    highlights: ['Steerable nose leg', 'Folds up when afloat', 'Three-point stance on land'],
+    parts: ['S45 BOW LEG'],
+    viewFrom: [1, 0.2, 0.8],
   },
   {
-    id: 'outboards',
-    name: 'Twin Outboards',
-    description:
-      'Twin outboards on the transom give redundancy for patrol and rescue work, under a stainless arch that guards the cockpit.',
-    highlights: ['Twin-engine redundancy', 'Yamaha and Tohatsu options', 'Stainless stern arch'],
-    anchor: [-4.45, 1.45, 0.45],
-    view: { position: [-10, 3.2, 4.5], target: [-4, 0.3, 0] },
-  },
-  {
-    id: 'wheelhouse',
-    name: 'Enclosed Wheelhouse',
-    description:
-      'An enclosed, all-round-glazed wheelhouse with helm and navigator seats and an instrument console with a multifunction display.',
-    highlights: ['Helm and navigator seats', 'Instrument console with MFD', 'All-round glazing'],
-    anchor: [0.4, 1.2, 1.0],
-    view: { position: [-6.8, 4.4, 4.2], target: [0.6, 0.6, 0] },
+    id: 'ground-tackle',
+    name: 'Anchoring',
+    description: 'Foredeck anchor windlass with the anchor and a chain guide at the bow.',
+    highlights: ['Anchor windlass', 'Bow anchor', 'Chain guide'],
+    parts: ['Anchor Windlass', 'anchor-1', 'chain guid'],
+    viewFrom: [0.8, 1, 0.5],
   },
   {
     id: 'navigation',
-    name: 'Navigation & Lighting',
-    description:
-      'Roof-mounted antenna, dome, deck floodlights and port and starboard navigation lights, wired back to the helm.',
-    highlights: ['Navigation lights', 'Deck floodlights', 'Antenna and roof dome'],
-    anchor: [0.2, 2.35, 0],
-    view: { position: [5, 6, 6], target: [0.4, 1.5, 0] },
-  },
-  {
-    id: 'aft-cockpit',
-    name: 'Aft Cockpit',
-    description: 'An open aft cockpit with U-shaped seating around a central table, doubling as a working deck.',
-    highlights: ['U-shaped seating', 'Central table', 'Open working deck'],
-    anchor: [-2.4, 1, 0],
-    view: { position: [-3, 7.5, 4.5], target: [-2.2, 0.2, 0] },
-  },
-  {
-    id: 'forward-cabin',
-    name: 'Forward Cabin',
-    description:
-      'Below the foredeck, a forward cabin with a marine head is reached from the wheelhouse. The viewer cuts the hull in half to show it.',
-    highlights: ['Below-deck cabin', 'Marine head', 'Access from the wheelhouse'],
-    anchor: [3.15, 0.5, 0],
-    view: { position: [2.2, 0.8, 8.5], target: [1.6, 0, 0] },
-    section: true,
+    name: 'Lights & Antenna',
+    description: 'Port and starboard navigation lights, LED deck lights, an antenna and speakers inside and out.',
+    highlights: ['Navigation lights', 'LED deck lights', 'Antenna and speakers'],
+    parts: ['m6 light', 'GREEN light', 'red light', 'Antenna', 'speaker'],
+    viewFrom: [0.6, 1, 0.8],
   },
 ]
 
-/** Hull colours offered in the viewer; the first is the default. */
-export const boatHullFinishes: BoatHullFinish[] = [
-  { id: 'gunmetal', label: 'Gunmetal', color: '#8a949a', metalness: 0.45, roughness: 0.38 },
-  { id: 'copper', label: 'Copper', color: '#b8744f', metalness: 0.85, roughness: 0.3 },
-  { id: 'arctic', label: 'Arctic White', color: '#e3e7e8', metalness: 0.1, roughness: 0.32 },
+/** Show/hide switches in the viewer. */
+export const boatLayers: BoatLayer[] = [
+  { id: 'wheelhouse', label: 'Wheelhouse', features: ['wheelhouse'] },
+  { id: 'hull', label: 'Hull', features: ['hull', 'deck', 'ground-tackle'] },
+  { id: 'fittings', label: 'Fittings', features: ['helm', 'seating', 'head', 'navigation'] },
+  { id: 'engines', label: 'Engines', features: ['engines'] },
+  { id: 'wheels', label: 'Wheels', features: ['stern-legs', 'bow-leg'] },
 ]
+
+/**
+ * Parts fitted as a port and starboard pair. When the model has only one of a pair (a part dropped from the
+ * export), the viewer mirrors it across the centreline to fill the other side.
+ */
+export const boatMirroredPairs: string[] = ['S45 STERN', 'yamaha 250 hp']
+
+/** Wheel legs: the CAD model has them lowered; `angle` raises them for water. */
+export const boatWheelLegs: BoatHinge[] = [
+  { parts: ['S45 STERN'], pivot: [0.85, 0.95, 0.5], axis: 'z', angle: -1.6 },
+  { parts: ['S45 BOW LEG'], pivot: [0.2, 0.95, 0.5], axis: 'z', angle: 1.6 },
+]
+
+/** Outboard steering: each engine turns about a vertical axis near its transom bracket, up to `angle` each way. */
+export const boatSteering: BoatHinge = { parts: ['yamaha 250 hp'], pivot: [0.9, 0.5, 0.5], axis: 'y', angle: 0.5 }
 
 const render = (id: string, alt: string): GalleryItem => ({
   id,

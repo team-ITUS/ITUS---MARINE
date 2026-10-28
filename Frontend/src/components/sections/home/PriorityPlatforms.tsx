@@ -39,6 +39,8 @@ function PriorityPlatform({ vessel, className, imageClassName = '', flagship = f
         <img
           className={`h-full object-cover transition-transform duration-700 group-hover:scale-[1.02] ${imageClassName}`}
           src={image ?? vessel.heroImage}
+          loading="lazy"
+          decoding="async"
           alt={vessel.name}
         />
       </Link>

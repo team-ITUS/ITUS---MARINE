@@ -46,3 +46,4 @@ desktop.ini
 
 # Local deployment archives
 *.zip
+public/*.glb
