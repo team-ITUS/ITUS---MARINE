@@ -1,6 +1,7 @@
 import { asset } from '@/utils/asset'
 import { useState } from 'react'
 import type { FormEvent } from 'react'
+import ConsentCheck from '@/components/common/ConsentCheck'
 import FormField, { fieldClass } from '@/components/common/FormField'
 import Seo from '@/components/common/Seo'
 import MainLayout from '@/components/layout/MainLayout'
@@ -8,7 +9,10 @@ import EnquirySent from '@/components/sections/contact/EnquirySent'
 import JoinUs from '@/components/sections/contact/JoinUs'
 import { revealDelay, useReveal } from '@/hooks/useReveal'
 
-const office = 'border-t border-technical-border pt-5'
+/** From md up, fields shrink on shorter screens (laptops) so the form, consent and button fit in one screen. */
+const inputClass = `${fieldClass} md:min-h-[clamp(40px,5.5vh,50px)] md:py-[clamp(6px,1.3vh,14px)]`
+
+const office ='border-t border-technical-border pt-5'
 const officeNumber = 'text-xs font-semibold text-oxide-red'
 const officeName = 'mb-2 mt-4 block font-display text-[17px] font-medium leading-[normal] text-carbon-black'
 
@@ -48,9 +52,11 @@ export default function Contact() {
         title="Contact | ITUS Marine"
         description="Contact ITUS Marine about vessel requirements, marine systems, propulsion and lifecycle support."
       />
-      {/* Desktop: exactly one screen tall, so the form sits beside the photo without scrolling. */}
-      <section ref={ref} className="grid min-h-screen grid-cols-1 bg-white md:h-screen md:min-h-[640px] md:grid-cols-[45%_55%]">
-        <div className="relative h-[60vh] overflow-hidden sm:h-[70vh] md:h-full after:absolute after:inset-0 after:bg-[linear-gradient(0deg,rgba(14,20,24,.6),transparent_55%)] after:content-['']">
+      {/* Desktop: at least one screen tall, with fields sized to the screen height so the whole form usually fits beside
+          the photo without scrolling. Never a fixed height: on a very short screen the section grows instead of
+          clipping the form under the next section. */}
+      <section ref={ref} className="grid min-h-screen grid-cols-1 bg-white md:min-h-[max(100vh,600px)] md:grid-cols-[45%_55%]">
+        <div className="relative h-[60vh] overflow-hidden sm:h-[70vh] md:h-auto after:absolute after:inset-0 after:bg-[linear-gradient(0deg,rgba(14,20,24,.6),transparent_55%)] after:content-['']">
           <img className="hero-bg h-full object-cover" src={asset('/images/contact/amphibious-boat-4.webp')} alt="ITUS marine team vessel" />
         </div>
         {/* Top padding clears the fixed header (76px); content is centred in the space below it. */}
@@ -59,23 +65,22 @@ export default function Contact() {
           <h1 className="reveal mb-[55px] font-display text-[49px] font-semibold leading-[.95] tracking-[-.05em] text-carbon-black sm:text-[clamp(52px,5vw,74px)] md:mb-[clamp(24px,4.5vh,48px)] md:text-center md:text-[clamp(40px,min(4.4vw,7vh),64px)]">
             Talk to Our Marine Team.
           </h1>
-          <br />
 
           {sent ? (
             <EnquirySent onReset={() => setSent(false)} />
           ) : (
             <form style={revealDelay(100)} className="reveal flex flex-col gap-y-6 md:gap-y-[clamp(12px,2.2vh,24px)]" onSubmit={submit}>
               <FormField label="Name">
-                <input className={fieldClass} name="name" required autoComplete="name" />
+                <input className={inputClass} name="name" required autoComplete="name" />
               </FormField>
               <FormField label="Organisation">
-                <input className={fieldClass} name="organisation" required autoComplete="organization" />
+                <input className={inputClass} name="organisation" required autoComplete="organization" />
               </FormField>
               {/* Side by side from sm up so the extra field doesn't push the form past one screen. */}
               <div className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2">
                 <FormField label="Contact Number">
                   <input
-                    className={fieldClass}
+                    className={inputClass}
                     name="phone"
                     required
                     type="tel"
@@ -86,13 +91,19 @@ export default function Contact() {
                   />
                 </FormField>
                 <FormField label="Email">
-                  <input className={fieldClass} name="email" required type="email" autoComplete="email" />
+                  <input className={inputClass} name="email" required type="email" autoComplete="email" />
                 </FormField>
               </div>
               <FormField label="Message">
-                <textarea className={`${fieldClass} resize-none`} name="message" required rows={3} />
+                <textarea className={`${inputClass} resize-none md:h-[clamp(60px,10vh,104px)]`} name="message" required rows={3} />
               </FormField>
-              {error && <p className="text-sm text-oxide-red" role="alert">{error}</p>}
+              {/* Reason and agreement in one line, so the form still fits one screen on desktop. */}
+              <ConsentCheck
+                id="contact-consent"
+                required
+                agreement="I agree that ITUS Marine may use these details only to reply to my enquiry, never for marketing."
+              />
+              {error &&<p className="text-sm text-oxide-red" role="alert">{error}</p>}
               <button className="btn btn-primary mt-2 w-fit md:self-center" type="submit" disabled={sending}>
                 {sending ? 'Sending…' : 'Send Enquiry'}
               </button>

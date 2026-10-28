@@ -8,6 +8,7 @@ import Contact from '@/pages/Contact'
 import Gallery from '@/pages/Gallery'
 import Home from '@/pages/Home'
 import NotFound from '@/pages/NotFound'
+import PrivacyPolicy from '@/pages/PrivacyPolicy'
 import VesselDetail from '@/pages/VesselDetail'
 import Vessels from '@/pages/Vessels'
 
@@ -29,6 +30,7 @@ export default function AppRoutes() {
       <Route path="/case-studies" element={<CaseStudies />} />
       <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
       {/* Legacy URLs from the earlier site structure */}
       <Route

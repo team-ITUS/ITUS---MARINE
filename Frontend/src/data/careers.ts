@@ -40,4 +40,5 @@ export const profileMessages = {
   phone: 'Please enter a valid phone number.',
   url: 'Please enter a valid URL, starting with https://',
   resume: 'Please upload your CV in PDF, DOC or DOCX format within the permitted file-size limit.',
+  consent: 'Please tick the box to agree before submitting your profile.',
 }

@@ -7,6 +7,10 @@ const urlRegex = /^https?:\/\/\S+\.\S+/i
 
 const clean = (value) => (typeof value === 'string' ? value.trim() : '')
 
+const consentError = 'Please tick the box to agree before submitting.'
+/** The forms send consent=yes from the Privacy Policy checkbox. */
+const hasConsent = (body) => body.consent === 'yes'
+
 /** Copies the listed fields from req.body (trimmed) and marks the required ones that are empty. */
 function pick(body, fields, required) {
   const data = {}
@@ -24,9 +28,10 @@ export function validateContact(req, res, next) {
 
   if (data.email && !emailRegex.test(data.email)) errors.email = 'Please enter a valid email address.'
   if (data.phone && !phoneRegex.test(data.phone)) errors.phone = 'Please enter a valid phone number.'
+  if (!hasConsent(req.body ?? {})) errors.consent = consentError
 
   if (Object.keys(errors).length) return res.status(400).json({ ok: false, errors })
-  req.data = data
+  req.data = { ...data, consentAt: new Date() }
   next()
 }
 
@@ -42,11 +47,12 @@ export function validateApplication(req, res, next) {
   if (data.expertise && !expertiseOptions.includes(data.expertise)) errors.expertise = 'Please select a valid option.'
   if (data.message.length > 2000) errors.message = 'Message must be 2000 characters or less.'
   if (!req.file) errors.cv = 'This field is required.'
+  if (!hasConsent(req.body ?? {})) errors.consent = consentError
 
   if (Object.keys(errors).length) {
     if (req.file) fs.unlink(req.file.path, () => {}) // don't keep the CV of a rejected form
     return res.status(400).json({ ok: false, errors })
   }
-  req.data = data
+  req.data = { ...data, consentAt: new Date() }
   next()
 }

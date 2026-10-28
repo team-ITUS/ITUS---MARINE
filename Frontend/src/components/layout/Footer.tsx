@@ -71,7 +71,10 @@ export default function Footer() {
       </div>
       <div className={`${stripClass} pt-[22px] text-xs uppercase tracking-[.04em]`}>
         <span>© {new Date().getFullYear()} ITUS Marine</span>
-        <span>Vessel Engineering / Shipbuilding</span>
+        <span className="flex flex-wrap gap-x-6 gap-y-2">
+          <Link className="transition-colors duration-200 hover:text-white" to="/privacy-policy">Privacy Policy</Link>
+          <span>Vessel Engineering / Shipbuilding</span>
+        </span>
       </div>
     </footer>
   )

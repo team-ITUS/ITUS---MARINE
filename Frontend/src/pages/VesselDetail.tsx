@@ -166,7 +166,7 @@ export default function VesselDetail() {
                 <div key={spec.label} className={Array.isArray(spec.value) ? specRowMulti : specRow}>
                   <span className="text-sm text-slate-grey">{spec.label}</span>
                   {Array.isArray(spec.value) ? (
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className="grid grid-cols-[minmax(0,180px)_minmax(0,1fr)] gap-4">
                       {spec.value.map((v, i) => (
                         <strong key={i} className="text-sm font-medium leading-normal text-carbon-black">{v}</strong>
                       ))}

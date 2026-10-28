@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import type { ChangeEvent, FormEvent, ReactNode } from 'react'
+import ConsentCheck from '@/components/common/ConsentCheck'
 import { fieldClass } from '@/components/common/FormField'
 import { experienceOptions, expertiseOptions, profileMessages, resumeRules } from '@/data/careers'
 import { revealDelay } from '@/hooks/useReveal'
@@ -7,9 +8,9 @@ import { revealDelay } from '@/hooks/useReveal'
 type Errors = Partial<Record<FieldName, string>>
 
 /** Form fields in DOM order (the first invalid one gets focus). `website` is a honeypot and is not validated. */
-const fields = ['fullName', 'email', 'phone', 'location', 'currentRole', 'experience', 'expertise', 'linkedin', 'cv', 'message'] as const
+const fields = ['fullName', 'email', 'phone', 'location', 'currentRole', 'experience', 'expertise', 'linkedin', 'cv', 'message', 'consent'] as const
 type FieldName = (typeof fields)[number]
-const required: FieldName[] = ['fullName', 'email', 'phone', 'location', 'experience', 'expertise', 'cv']
+const required: FieldName[] = ['fullName', 'email', 'phone', 'location', 'experience', 'expertise', 'cv', 'consent']
 
 const inputClass = `${fieldClass} aria-[invalid=true]:border-oxide-red`
 
@@ -29,6 +30,7 @@ function fieldError(name: FieldName, data: FormData): string | undefined {
     const file = data.get('cv')
     return resumeError(file instanceof File ? file : null)
   }
+  if (name === 'consent') return data.get('consent') ? undefined : profileMessages.consent
   const value = String(data.get(name) ?? '').trim()
   if (!value) return required.includes(name) ? profileMessages.required : undefined
   if (name === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return profileMessages.email
@@ -252,6 +254,16 @@ export default function ProfileForm() {
           <input name="website" tabIndex={-1} autoComplete="off" />
         </label>
       </div>
+
+      <ConsentCheck
+        className="sm:col-span-2"
+        id="profile-consent"
+        required
+        aria-invalid={errors.consent ? true : undefined}
+        error={errors.consent}
+        why="We use your details and CV only to assess your profile for current and upcoming roles at ITUS Marine, and to contact you about them. They are seen only by our HR team and are never sold or used for marketing."
+        agreement="I agree that ITUS Marine may store my details and CV for recruitment purposes and contact me about suitable roles."
+      />
 
       <div className="sm:col-span-2">
         {formError && <p className="mb-4 text-sm text-oxide-red" role="alert">{formError}</p>}

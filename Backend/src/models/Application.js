@@ -35,6 +35,8 @@ const applicationSchema = new mongoose.Schema(
     expertise: { type: String, required: true, enum: expertiseOptions },
     linkedin: { type: String, trim: true },
     message: { type: String, trim: true, maxlength: 2000 },
+    // When the applicant ticked the Privacy Policy consent box.
+    consentAt: { type: Date, required: true },
     cv: {
       originalName: String,
       fileName: String,
