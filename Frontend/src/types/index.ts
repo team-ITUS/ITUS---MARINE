@@ -54,6 +54,43 @@ export interface CapabilityChapterData {
   image: string
 }
 
+/** World-space point in the 3D boat viewer: x towards the bow, y up, z to starboard (metres). */
+export type Vec3 = [number, number, number]
+
+/** Camera placement in the 3D boat viewer. */
+export interface BoatCameraView {
+  position: Vec3
+  target: Vec3
+}
+
+export interface BoatCameraPreset extends BoatCameraView {
+  id: string
+  label: string
+}
+
+/** A selectable part of the amphibious boat, shown as a hotspot on the model and in the feature list. */
+export interface BoatFeature {
+  id: string
+  name: string
+  description: string
+  highlights: string[]
+  /** Where the hotspot sits on the model. */
+  anchor: Vec3
+  /** Camera move when the feature is selected. */
+  view: BoatCameraView
+  /** Switch the viewer to the half-section cut so the feature (inside the hull) is visible. */
+  section?: boolean
+}
+
+/** Hull colour option in the 3D boat viewer (PBR values for the hull material). */
+export interface BoatHullFinish {
+  id: string
+  label: string
+  color: string
+  metalness: number
+  roughness: number
+}
+
 /** [label, value] pairs shown in spec rails and rows */
 export type SpecEntry = [label: string, value: string]
 

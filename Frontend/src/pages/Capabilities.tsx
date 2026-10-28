@@ -3,6 +3,7 @@ import Seo from '@/components/common/Seo'
 import SimpleCta from '@/components/common/SimpleCta'
 import MainLayout from '@/components/layout/MainLayout'
 import CapabilityChapter from '@/components/sections/CapabilityChapter'
+import AmphibiousViewer from '@/components/sections/capabilities/AmphibiousViewer'
 import { capabilityChapters } from '@/data/capabilities'
 import { useReveal } from '@/hooks/useReveal'
 import { asset } from '@/utils/asset'
@@ -54,6 +55,7 @@ export default function Capabilities() {
         {capabilityChapters.map((chapter, index) => (
           <CapabilityChapter key={chapter.id} chapter={chapter} index={index} />
         ))}
+        <AmphibiousViewer />
         <SimpleCta title="Discuss a Vessel Project." />
       </div>
     </MainLayout>

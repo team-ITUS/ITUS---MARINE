@@ -6,8 +6,9 @@ import { existsSync, rmSync } from 'node:fs'
 
 /**
  * Production-build housekeeping:
- *  - public/NewAssets holds the original PNG exports (git-ignored). Vite copies
- *    all of /public into /dist, so remove that folder to keep the build small.
+ *  - public/NewAssets and public/3D Boat Images hold original PNG exports
+ *    (git-ignored). Vite copies all of /public into /dist, so remove those
+ *    folders to keep the build small.
  *  - public/.htaccess (SPA routing, caching, security headers) must reach /dist
  *    on every build; fail loudly if it is missing instead of shipping a site
  *    that 404s on refresh.
@@ -18,7 +19,9 @@ function productionHousekeeping(): Plugin {
     name: 'production-housekeeping',
     apply: 'build',
     closeBundle() {
-      rmSync(path.join(dist, 'NewAssets'), { recursive: true, force: true })
+      for (const folder of ['NewAssets', '3D Boat Images']) {
+        rmSync(path.join(dist, folder), { recursive: true, force: true })
+      }
       if (!existsSync(path.join(dist, '.htaccess'))) {
         throw new Error('dist/.htaccess is missing. Keep public/.htaccess in the project.')
       }
