@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
-import Arrow from '@/components/common/Arrow'
 import Brand from '@/components/common/Brand'
-import { primaryNav, rescueUrl } from '@/data/navigation'
+import { primaryNav } from '@/data/navigation'
 
 /** Nav link with an oxide-red underline that grows on hover and for the active route. */
 const underline =
@@ -90,15 +89,6 @@ export default function Header() {
             </NavLink>
           ))}
         </nav>
-        <a
-          className="mt-6 text-[15px] text-arctic-blue-grey hover:text-white"
-          href={rescueUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => setOpen(false)}
-        >
-          Rescue Products <Arrow />
-        </a>
       </div>
     </header>
   )
