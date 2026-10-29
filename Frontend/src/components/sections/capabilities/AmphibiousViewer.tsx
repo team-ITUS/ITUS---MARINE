@@ -270,7 +270,7 @@ export default function AmphibiousViewer() {
           </div>
 
           <aside className="flex flex-col bg-carbon-black" aria-label="Boat features">
-            <div className="min-h-[230px] border-b border-dark-steel-border p-6" aria-live="polite">
+            <div className="border-b sm:min-h-[230px] border-dark-steel-border p-6" aria-live="polite">
               {selected ? (
                 <>
                   <span className="text-[13px] font-semibold text-oxide-red">{number(selected.id)}</span>
@@ -295,14 +295,15 @@ export default function AmphibiousViewer() {
                     Explore the boat
                   </h3>
                   <p className="m-0 text-[15px] leading-[1.6] text-ice-grey">
-                    Click a part of the model, a numbered point or a feature below to fly the camera to it and see what
-                    it does.
+                    Tap a part of the model or a numbered point<span className="max-sm:hidden">, or a feature below,</span> to fly
+                    the camera to it and see what it does.
                   </p>
                 </>
               )}
             </div>
 
-            <ol className="m-0 list-none p-0">
+            {/* The list repeats the numbered points; phones leave it out to keep the panel short. */}
+            <ol className="m-0 list-none p-0 max-sm:hidden">
               {features.map((feature) => (
                 <li key={feature.id}>
                   <button

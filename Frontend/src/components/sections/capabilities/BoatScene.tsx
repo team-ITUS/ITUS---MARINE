@@ -80,6 +80,7 @@ export default function BoatScene(props: BoatSceneProps) {
               steering={props.steering}
               hiddenFeatures={props.hiddenFeatures}
               selectedId={props.selectedId}
+              blinkKey={props.shot.key}
               onSelect={props.onSelect}
               onReady={handleReady}
               reducedMotion={props.reducedMotion}

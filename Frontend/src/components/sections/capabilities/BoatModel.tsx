@@ -1,6 +1,6 @@
 import { useGLTF } from '@react-three/drei'
 import { useFrame, useThree, type ThreeEvent } from '@react-three/fiber'
-import { useEffect, useMemo, useState, type RefObject } from 'react'
+import { useEffect, useMemo, useRef, useState, type RefObject } from 'react'
 import * as THREE from 'three'
 import { boatMirroredPairs, boatModel, boatSteering, boatWheelLegs } from '@/data/amphibious'
 import type { BoatFeature, BoatHinge, BoatViewMode } from '@/types'
@@ -19,6 +19,8 @@ const roofPlane = new THREE.Plane(new THREE.Vector3(0, -1, 0), ROOF_OPEN)
 const sectionPlane = new THREE.Plane(new THREE.Vector3(0, 0, -1), SECTION_OPEN)
 
 const SELECTED = new THREE.Color('#A94D42')
+/** Length of the two-blink flash on a selected feature. */
+const BLINK_MS = 1200
 const AXES = { x: new THREE.Vector3(1, 0, 0), y: new THREE.Vector3(0, 1, 0), z: new THREE.Vector3(0, 0, 1) }
 
 /** The feature a model part belongs to (set on each part when the model is prepared). */
@@ -149,6 +151,8 @@ interface BoatModelProps {
   steering: number
   hiddenFeatures: Set<string>
   selectedId: string | null
+  /** Changes on every selection, so picking the same feature again blinks it again. */
+  blinkKey: number
   onSelect: (id: string) => void
   onReady: (parts: BoatParts) => void
   reducedMotion: boolean
@@ -163,6 +167,7 @@ export default function BoatModel({
   steering,
   hiddenFeatures,
   selectedId,
+  blinkKey,
   onSelect,
   onReady,
   reducedMotion,
@@ -179,21 +184,13 @@ export default function BoatModel({
     for (const [id, parts] of boat.parts) for (const part of parts) part.visible = !hiddenFeatures.has(id)
   }, [boat, hiddenFeatures])
 
+  // A selected feature blinks twice, then returns to its own finish. `blinkKey` restarts it on every selection,
+  // including picking the same feature again.
+  const blink = useRef<{ id: string; time: number } | null>(null)
+  const glow = useRef(new Map<string, number>())
   useEffect(() => {
-    for (const [id, materials] of boat.materials) {
-      const strength = id === selectedId ? 0.45 : id === hoveredId ? 0.2 : 0
-      for (const material of materials) {
-        if (!material.emissive) continue
-        if (strength) {
-          material.emissive.copy(SELECTED)
-          material.emissiveIntensity = strength
-        } else {
-          material.emissive.copy(material.userData.emissive)
-          material.emissiveIntensity = material.userData.emissiveIntensity
-        }
-      }
-    }
-  }, [boat, selectedId, hoveredId])
+    blink.current = selectedId ? { id: selectedId, time: performance.now() } : null
+  }, [selectedId, blinkKey])
 
   useEffect(() => {
     canvas.style.cursor = hoveredId ? 'pointer' : ''
@@ -218,6 +215,26 @@ export default function BoatModel({
     }
     for (const leg of boat.legs) turn(leg, deployed ? 0 : leg.hinge.angle, 2.4)
     for (const engine of boat.engines) turn(engine, steering * engine.hinge.angle, 3)
+
+    const elapsed = blink.current ? (performance.now() - blink.current.time) / BLINK_MS : 1
+    if (elapsed >= 1) blink.current = null
+    for (const [id, materials] of boat.materials) {
+      // Two pulses: sin² rises and falls twice over the blink.
+      const strength =
+        blink.current?.id === id ? 0.5 * Math.sin(Math.PI * 2 * elapsed) ** 2 : id === hoveredId ? 0.2 : 0
+      if (glow.current.get(id) === strength) continue
+      glow.current.set(id, strength)
+      for (const material of materials) {
+        if (!material.emissive) continue
+        if (strength) {
+          material.emissive.copy(SELECTED)
+          material.emissiveIntensity = strength
+        } else {
+          material.emissive.copy(material.userData.emissive)
+          material.emissiveIntensity = material.userData.emissiveIntensity
+        }
+      }
+    }
   })
 
   /** The feature under the pointer, skipping hidden parts and the parts of the model that are cut away. */
