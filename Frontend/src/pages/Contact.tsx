@@ -86,7 +86,7 @@ export default function Contact() {
                     type="tel"
                     inputMode="tel"
                     autoComplete="tel"
-                    pattern="[0-9+()\- ]{7,20}"
+                    pattern="[0-9+\(\)\- ]{7,20}"
                     title="Enter a valid contact number"
                   />
                 </FormField>

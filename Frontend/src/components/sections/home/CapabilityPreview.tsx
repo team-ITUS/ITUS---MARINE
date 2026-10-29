@@ -33,7 +33,7 @@ export default function CapabilityPreview() {
       <div className="reveal reveal-opacity relative min-h-[480px] min-w-0 sm:min-h-[650px] md:min-h-0">
         <img
           className="h-full object-cover"
-          src={asset('/images/home/from-building-to-commissioning/Red Amphibious Rescue Boat at Marina Beach.webp')}
+          src={asset('/images/home/from-building-to-commissioning/red-amphibious-rescue-boat-marina-beach.webp')}
           loading="lazy"
           decoding="async"
           alt="ITUS amphibious vessel platform"

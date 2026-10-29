@@ -21,7 +21,7 @@ export const vessels: Vessel[] = [
     shortDescription: 'High-speed amphibious RIB platform engineered for rapid response across shorelines, shallow-water approaches and emergency evacuation environments.',
     longDescription: 'High-speed amphibious RIB platform engineered for rapid response across shorelines, shallow-water approaches and emergency evacuation environments. The vessel combines a high-speed rescue RIB hull with hydraulic land mobility, enabling launch, recovery and shore-to-water transitions where conventional craft may face access limitations.',
     heroImage: asset('/images/vessels/amphibious-boat/amphibious-boat-3.webp'),
-    galleryImages: [asset('/images/vessels/amphibious-boat/Red Amphibious Rescue Boat at Marina Beach.webp')],
+    galleryImages: [asset('/images/vessels/amphibious-boat/red-amphibious-rescue-boat-marina-beach.webp')],
     length: '10.2 m approx.',
     beam: '3.27 m',
     draft: '0.60 m approx.',
