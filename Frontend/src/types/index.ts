@@ -54,6 +54,57 @@ export interface CapabilityChapterData {
   image: string
 }
 
+/** World-space point in the 3D boat viewer: x towards the bow, y up, z to starboard (metres). */
+export type Vec3 = [number, number, number]
+
+/** Camera placement in the 3D boat viewer. */
+export interface BoatCameraView {
+  position: Vec3
+  target: Vec3
+}
+
+export interface BoatCameraPreset extends BoatCameraView {
+  id: string
+  label: string
+}
+
+/** Exterior shows the whole boat, Interior lifts the wheelhouse roof off, Cutaway cuts the hull along the centreline. */
+export type BoatViewMode = 'exterior' | 'interior' | 'cutaway'
+
+/** A selectable group of parts in the boat model, shown as a hotspot, in the feature list and in the detail panel. */
+export interface BoatFeature {
+  id: string
+  name: string
+  description: string
+  highlights: string[]
+  /** Start of the names of the model's parts (the CAD assembly's top-level components) that belong to this feature. */
+  parts: string[]
+  /** Direction from the feature towards the camera when the feature is selected. */
+  viewFrom: Vec3
+  /** View mode the feature can be seen in; selecting it switches to that mode. */
+  mode?: BoatViewMode
+  /** Outer shell part: cut open in Cutaway mode. */
+  shell?: boolean
+}
+
+/** Show/hide switch for a set of features. */
+export interface BoatLayer {
+  id: string
+  label: string
+  features: string[]
+}
+
+/** Parts that swing about a hinge: each matching part turns about its own hinge point. */
+export interface BoatHinge {
+  parts: string[]
+  /** Hinge position inside each part's bounding box, as fractions of its size on x, y and z (0 = min, 1 = max). */
+  pivot: Vec3
+  /** Turning axis. */
+  axis: 'x' | 'y' | 'z'
+  /** Largest turn, in radians: the raised position for wheel legs, full lock for steering. */
+  angle: number
+}
+
 /** [label, value] pairs shown in spec rails and rows */
 export type SpecEntry = [label: string, value: string]
 

@@ -23,11 +23,12 @@ interface EditorialHeroProps {
 export default function EditorialHero({ title, label, intro, compact = false, video }: EditorialHeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
 
-  // Reduced-motion users keep the poster frame, when one is supplied, instead of the looping background video.
+  // The video only downloads once play() runs. Reduced-motion and data-saver users keep the poster frame instead.
   useEffect(() => {
     const el = videoRef.current
     if (!el) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) el.pause()
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData
+    if (saveData || window.matchMedia('(prefers-reduced-motion: reduce)').matches) el.pause()
     else el.play().catch(() => {})
   }, [video?.src])
 
@@ -51,8 +52,7 @@ export default function EditorialHero({ title, label, intro, compact = false, vi
             muted
             loop
             playsInline
-            autoPlay
-            preload="auto"
+            preload={video.poster ? 'none' : 'metadata'}
             aria-label={video.label}
           >
             <source src={video.src} type="video/mp4" />

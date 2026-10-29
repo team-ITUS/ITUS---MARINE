@@ -34,6 +34,8 @@ export default function CapabilityPreview() {
         <img
           className="h-full object-cover"
           src={asset('/images/home/from-building-to-commissioning/Red Amphibious Rescue Boat at Marina Beach.webp')}
+          loading="lazy"
+          decoding="async"
           alt="ITUS amphibious vessel platform"
         />
       </div>

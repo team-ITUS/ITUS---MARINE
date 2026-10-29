@@ -9,6 +9,8 @@ dist-ssr/
 # Source design assets: original PNG exports. The optimised WebP versions
 # live in public/images and are what the site actually uses.
 public/NewAssets/
+public/3D Boat Images/
+public/CAD File/
 
 # Environment files (keep secrets out of git)
 .env
@@ -44,3 +46,4 @@ desktop.ini
 
 # Local deployment archives
 *.zip
+public/*.glb

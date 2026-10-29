@@ -44,6 +44,8 @@ export default function IndustryWall() {
             <img
               className="reveal reveal-opacity block aspect-[2/1] h-auto w-full"
               src={asset('/images/home/across-maritime-spectrum/typographic-rescue-boat-wordmark-1.svg')}
+              loading="lazy"
+              decoding="async"
               alt={`Maritime sectors served: ${sectors.join(', ')}`}
             />
           </div>
